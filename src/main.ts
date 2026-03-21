@@ -1,5 +1,4 @@
 import './style.css'
-import heroImg from './assets/hero.png'
 
 type TabId = 'news' | 'gear' | 'home' | 'health' | 'community'
 type ThemeMode = 'light' | 'dark'
@@ -19,11 +18,65 @@ type HealthData = {
 }
 
 const tabs: Array<{ id: TabId; label: string; icon: string }> = [
-  { id: 'news', label: 'News', icon: 'N' },
-  { id: 'gear', label: 'Gear', icon: 'G' },
-  { id: 'home', label: 'Home', icon: 'H' },
-  { id: 'health', label: 'Health', icon: 'F' },
-  { id: 'community', label: 'Community', icon: 'C' },
+  { id: 'news', label: 'News', icon: '[]' },
+  { id: 'gear', label: 'Gear', icon: '▣' },
+  { id: 'home', label: 'Home', icon: '⌂' },
+  { id: 'health', label: 'Health', icon: '♡' },
+  { id: 'community', label: 'Community', icon: '◌' },
+]
+
+const recentMatches = [
+  {
+    result: 'W',
+    opponent: 'vs. M. Torres & K. Patel',
+    venue: 'Darden Court',
+    time: '2h ago',
+    score: '11-7',
+    delta: '+14',
+  },
+  {
+    result: 'W',
+    opponent: 'vs. R. Chen & D. Okafor',
+    venue: 'Pen Park',
+    time: 'Yesterday',
+    score: '11-9',
+    delta: '+11',
+  },
+  {
+    result: 'L',
+    opponent: 'vs. S. Williams & J. Nakamura',
+    venue: 'McIntire',
+    time: '2 days ago',
+    score: '8-11',
+    delta: '-9',
+  },
+]
+
+const nearbyCourts = [
+  {
+    name: 'Darden Towe Park',
+    distance: '0.8 mi',
+    openCourts: '4 courts open',
+    waiting: '3 waiting',
+    status: 'Busy',
+    level: 74,
+  },
+  {
+    name: 'Pen Park',
+    distance: '1.4 mi',
+    openCourts: '2 courts open',
+    waiting: '1 waiting',
+    status: 'Open',
+    level: 35,
+  },
+  {
+    name: 'McIntire Park',
+    distance: '2.1 mi',
+    openCourts: '1 court open',
+    waiting: '6 waiting',
+    status: 'Full',
+    level: 96,
+  },
 ]
 
 const app = document.querySelector<HTMLDivElement>('#app')
@@ -59,7 +112,7 @@ const state: {
   healthLoading: boolean
 } = {
   activeTab: 'home',
-  theme: savedTheme === 'dark' ? 'dark' : 'light',
+  theme: savedTheme === 'light' ? 'light' : 'dark',
   courtFill: 72,
   healthData: loadStoredHealthData(),
   healthError: null,
@@ -254,93 +307,135 @@ const parseAppleHealthExport = async (file: File): Promise<HealthData> => {
 }
 
 const renderHome = () => {
-  const gaugeTone = renderGaugeTone(state.courtFill)
-  const gaugeLabel =
-    gaugeTone === 'danger'
-      ? 'Quiet courts'
-      : gaugeTone === 'warning'
-        ? 'Building traffic'
-        : 'Prime run'
+  const recoveryScore = 82
+  const recoveryStatus = recoveryScore >= 70 ? 'Peak' : recoveryScore >= 40 ? 'Moderate' : 'Rest'
+  const recoveryTone = recoveryScore >= 70 ? 'success' : recoveryScore >= 40 ? 'warning' : 'danger'
+  const trendWidth = `${Math.max(18, Math.min(100, state.courtFill))}%`
+  const recentMatchMarkup = recentMatches
+    .map(
+      (match) => `
+        <article class="list-card match-row">
+          <div class="match-badge ${match.result === 'W' ? 'success' : 'danger'}">${match.result}</div>
+          <div class="match-copy">
+            <strong>${match.opponent}</strong>
+            <span>${match.venue} · ${match.time}</span>
+          </div>
+          <div class="match-meta">
+            <strong>${match.score}</strong>
+            <span class="${match.result === 'W' ? 'gain' : 'loss'}">${match.delta}</span>
+          </div>
+        </article>
+      `,
+    )
+    .join('')
+
+  const courtMarkup = nearbyCourts
+    .map((court) => {
+      const tone = renderGaugeTone(court.level)
+      return `
+        <article class="list-card court-card">
+          <div class="court-header">
+            <div>
+              <strong>${court.name}</strong>
+              <span>${court.distance} · ${court.openCourts}</span>
+            </div>
+            <span class="court-waiting">${court.waiting}</span>
+          </div>
+          <div class="court-meter">
+            <div class="court-meter-fill ${tone}" style="width: ${court.level}%"></div>
+          </div>
+          <div class="court-scale">
+            <span>Empty</span>
+            <span>Moderate</span>
+            <strong class="${tone}">${court.status}</strong>
+          </div>
+        </article>
+      `
+    })
+    .join('')
 
   return `
     <section class="page page-home">
-      <div class="hero-card card">
-        <div class="hero-copy">
-          <p class="eyebrow">DUPR-linked profile</p>
-          <h1>Welcome back, Quan</h1>
-          <p class="hero-text">
-            Your rank is climbing. Queue into nearby courts, track your recent sets, and keep your
-            pickleball profile match-ready.
-          </p>
-          <div class="hero-stats">
-            <div>
-              <span class="stat-label">Live ELO</span>
-              <strong>1486</strong>
-            </div>
-            <div>
-              <span class="stat-label">Win Rate</span>
-              <strong>68%</strong>
-            </div>
-            <div>
-              <span class="stat-label">Queue ETA</span>
-              <strong>12 min</strong>
-            </div>
+      <section class="phone-shell card">
+        <div class="hero-panel">
+          <div class="eyebrow-row">
+            <p class="eyebrow brand-mark">PickleRank</p>
+            <strong class="hero-welcome">WELCOME BACK, ALEX</strong>
           </div>
-        </div>
-        <img src="${heroImg}" alt="Pickleball player illustration" class="hero-image" />
-      </div>
 
-      <section class="card">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">Nearby courts</p>
-            <h2>Court activity gauge</h2>
-          </div>
-          <span class="badge ${gaugeTone}">${gaugeLabel}</span>
-        </div>
-        <div class="gauge-card">
-          <div class="gauge-shell ${gaugeTone}">
-            <div class="gauge-fill" style="width: ${state.courtFill}%"></div>
-          </div>
-          <div class="gauge-meta">
-            <strong>${state.courtFill}% full</strong>
-            <span>Red means quiet, yellow means filling up, green means games are ready now.</span>
-          </div>
-        </div>
-        <label class="slider-block" for="court-fill">
-          <span>Adjust court activity input</span>
-          <input id="court-fill" type="range" min="0" max="100" value="${state.courtFill}" />
-        </label>
-      </section>
-
-      <section class="grid two-up">
-        <article class="card">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">Today</p>
-              <h2>Queue snapshot</h2>
+          <section class="hero-card dashboard-card">
+            <div class="rating-copy">
+              <p class="eyebrow">Your ELO rating</p>
+              <div class="rating-value">1847</div>
+              <div class="rating-delta">▲ +23 this week</div>
+              <div class="rating-pills">
+                <span class="pill gold">Gold III</span>
+                <span class="pill blue">DUPR 4.2</span>
+              </div>
             </div>
-          </div>
-          <ul class="list">
-            <li><span>CityWest Courts</span><strong>4 waiting</strong></li>
-            <li><span>Riverview Rec</span><strong>Open doubles</strong></li>
-            <li><span>Hoohacks Pop-Up</span><strong>Starts at 6:30 PM</strong></li>
-          </ul>
-        </article>
 
-        <article class="card">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">Match history</p>
-              <h2>Recent sets</h2>
+            <div class="trend-panel">
+              <p class="eyebrow">30-day trend</p>
+              <div class="trend-chart">
+                <div class="trend-line" style="width: ${trendWidth}"></div>
+              </div>
             </div>
+          </section>
+
+          <div class="stats-grid">
+            <article class="dashboard-card stat-tile">
+              <p class="eyebrow">Matches</p>
+              <strong>142</strong>
+              <span>68% win rate</span>
+            </article>
+            <article class="dashboard-card stat-tile">
+              <p class="eyebrow">Streak</p>
+              <strong>7W</strong>
+              <span>Personal best</span>
+            </article>
+            <article class="dashboard-card stat-tile">
+              <p class="eyebrow">Rank</p>
+              <strong>#84</strong>
+              <span>Charlottesville</span>
+            </article>
           </div>
-          <ul class="match-list">
-            <li><span>W vs. Alex / Priya</span><strong>11-8, 11-6</strong></li>
-            <li><span>L vs. Eastside Smash</span><strong>8-11, 9-11</strong></li>
-            <li><span>W ladder challenge</span><strong>11-7, 11-9</strong></li>
-          </ul>
-        </article>
+
+          <section class="health-banner ${recoveryTone}">
+            <div class="pulse-icon">∿</div>
+            <div class="health-copy">
+              <strong>You&apos;re ready to play - HRV is strong today</strong>
+              <span>Recovery score ${recoveryScore}% · 7h 20m sleep · Low resting HR</span>
+            </div>
+            <span class="health-pill">${recoveryStatus}</span>
+          </section>
+        </div>
+
+        <section class="section-block">
+          <div class="section-heading compact">
+            <h2>Recent matches</h2>
+            <a href="#" class="section-link">See all →</a>
+          </div>
+          <div class="stack-list">
+            ${recentMatchMarkup}
+          </div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading compact">
+            <h2>Nearby courts</h2>
+            <a href="#" class="section-link">Map view →</a>
+          </div>
+          <div class="stack-list">
+            ${courtMarkup}
+          </div>
+        </section>
+
+        <section class="section-block leaderboard-block">
+          <div class="section-heading compact">
+            <h2>Local leaderboard</h2>
+            <a href="#" class="section-link">Full rankings →</a>
+          </div>
+        </section>
       </section>
     </section>
   `
@@ -528,13 +623,28 @@ const render = () => {
   app.innerHTML = `
     <main class="app-shell">
       <header class="topbar">
-        <div>
-          <p class="eyebrow">Pickleball Ranker</p>
-          <strong class="app-title">Queue. Compete. Climb.</strong>
+        <span class="device-time">2:56 PM</span>
+        <div class="topbar-actions">
+          <div class="theme-toggle" role="group" aria-label="Theme switcher">
+            <button
+              class="theme-pill ${state.theme === 'dark' ? 'active' : ''}"
+              type="button"
+              data-theme="dark"
+            >
+              Dark
+            </button>
+            <button
+              class="theme-pill ${state.theme === 'light' ? 'active' : ''}"
+              type="button"
+              data-theme="light"
+            >
+              Light
+            </button>
+          </div>
+          <button class="avatar-chip" type="button" aria-label="Profile">
+            AJ
+          </button>
         </div>
-        <button class="theme-toggle" type="button" aria-label="Toggle light and dark mode">
-          ${state.theme === 'dark' ? 'Light mode' : 'Dark mode'}
-        </button>
       </header>
 
       <section class="content">${renderPage()}</section>
@@ -566,9 +676,12 @@ const render = () => {
     })
   })
 
-  app.querySelector<HTMLButtonElement>('.theme-toggle')?.addEventListener('click', () => {
-    state.theme = state.theme === 'dark' ? 'light' : 'dark'
-    render()
+  app.querySelectorAll<HTMLButtonElement>('[data-theme]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const nextTheme = button.dataset.theme as ThemeMode
+      state.theme = nextTheme
+      render()
+    })
   })
 
   app.querySelector<HTMLButtonElement>('#connect-apple-health')?.addEventListener('click', () => {

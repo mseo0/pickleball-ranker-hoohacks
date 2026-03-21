@@ -27,3 +27,4 @@ dist-ssr
 /backend/healthkit/latest_healthkit.json
 __pycache__/
 *.pyc
+.env

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 import tempfile
+import json
 
 from flask import Flask, jsonify, request
 
@@ -11,6 +12,7 @@ from healthkit.healthkit import (
     normalize_mobile_healthkit_payload,
     parse_healthkit_export,
     save_healthkit_snapshot,
+    get_pickleball_advice_from_healthkit,  # import the new function
 )
 
 
@@ -59,6 +61,27 @@ def sync_mobile_healthkit_payload():
         return jsonify(snapshot)
     except HealthKitParseError as exc:
         return jsonify({"error": str(exc)}), 400
+
+
+@app.get("/api/healthkit/pickleball-advice")
+def get_pickleball_advice():
+    """
+    Returns 1-3 sentences of feedback on the latest HealthKit metrics for pickleball improvement.
+    """
+    snapshot = load_healthkit_snapshot()
+    if snapshot is None or not snapshot.get("metrics"):
+        return jsonify({"error": "No HealthKit data has been ingested yet."}), 404
+    # Save metrics to a temp file to reuse the XML-based function
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".json") as temp_file:
+        temp_path = Path(temp_file.name)
+        temp_file.write(json.dumps(snapshot).encode("utf-8"))
+    try:
+        # Prompt Gemini for concise advice
+        api_key = request.args.get("api_key")  # Optionally allow API key via query param
+        advice = get_pickleball_advice_from_healthkit(temp_path, api_key=api_key)
+        return jsonify({"advice": advice})
+    finally:
+        temp_path.unlink(missing_ok=True)
 
 
 if __name__ == "__main__":

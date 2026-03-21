@@ -1,0 +1,38 @@
+export const mockLeaderboard = [
+  {
+    rank: 1,
+    initials: 'TK',
+    avatarBg: 'rgba(200,241,53,0.15)',
+    avatarColor: 'var(--accent)',
+    name: 'T. Kim',
+    score: 2104,
+    isMe: false,
+  },
+  {
+    rank: 2,
+    initials: 'SR',
+    avatarBg: 'rgba(180,180,255,0.1)',
+    avatarColor: '#aab4ff',
+    name: 'S. Ramos',
+    score: 1991,
+    isMe: false,
+  },
+  {
+    rank: 84,
+    initials: 'AJ',
+    avatarBg: 'rgba(200,241,53,0.2)',
+    avatarColor: 'var(--accent)',
+    name: 'You',
+    score: 1847,
+    isMe: true,
+  },
+  {
+    rank: 85,
+    initials: 'MB',
+    avatarBg: 'rgba(255,200,100,0.1)',
+    avatarColor: '#fbbf24',
+    name: 'M. Brown',
+    score: 1831,
+    isMe: false,
+  },
+]

@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+:root {
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --green: #4ade80;
+  --green-bg: rgba(74, 222, 128, 0.1);
+  --green-bd: rgba(74, 222, 128, 0.25);
+  --yellow: #facc15;
+  --yellow-bg: rgba(250, 204, 21, 0.1);
+  --red: #ef4444;
+  --red-bg: rgba(248, 113, 113, 0.1);
+  --red-bd: rgba(248, 113, 113, 0.22);
+  --blue: #88b4ff;
+  --blue-bg: rgba(100, 160, 255, 0.1);
+  --blue-bd: rgba(100, 160, 255, 0.25);
+}
+
+:root,
+:root[data-theme='dark'] {
+  --bg: #0f1a0f;
+  --surface: #1a2a1a;
+  --card: #162016;
+  --card2: #1e2e1e;
+  --sidebar: #0d170d;
+  --border: rgba(200, 241, 53, 0.13);
+  --border-sub: rgba(200, 241, 53, 0.08);
+  --text: #e8f0e8;
+  --muted: #7a9a7a;
+  --dim: #4a6a4a;
+  --accent: #c8f135;
+  --accent-dim: #a8cc1a;
+  --logo-icon-ink: #0f1a0f;
+}
+
+:root[data-theme='light'] {
+  --bg: #f0f4ec;
+  --surface: #ffffff;
+  --card: #ffffff;
+  --card2: #f8faf5;
+  --sidebar: #ffffff;
+  --border: rgba(80, 120, 40, 0.12);
+  --border-sub: rgba(80, 120, 40, 0.08);
+  --text: #1a2a1a;
+  --muted: #7a9a6a;
+  --dim: #a0b890;
+  --accent: #3d7a00;
+  --accent-dim: #2d5c00;
+  --logo-icon-ink: #ffffff;
+}
+
+@theme {
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-sans: 'DM Sans', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+svg {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.app-shell {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg);
+}

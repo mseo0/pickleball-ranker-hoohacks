@@ -1,4 +1,4 @@
-import { Grid2x2, Heart, Users } from 'lucide-react'
+import { Grid2x2, Heart, MapPinned, Users } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 import { useAuth } from '../../auth/AuthContext'
 
@@ -7,6 +7,7 @@ const navGroups = [
     label: 'Main',
     items: [
       { to: '/', label: 'Home', icon: Grid2x2, end: true },
+      { to: '/courts', label: 'Courts', icon: MapPinned },
       { to: '/health', label: 'Health', icon: Heart },
       { to: '/community', label: 'Community', icon: Users },
     ],

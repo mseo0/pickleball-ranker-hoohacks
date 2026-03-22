@@ -1,0 +1,327 @@
+{
+  "source": {
+    "name": "Bounce",
+    "url": "https://www.bounce.game/pickleball/city/charlottesville-virginia-us/courts",
+    "city": "Charlottesville",
+    "state": "Virginia",
+    "country": "US",
+    "scrapedAt": "2026-03-22"
+  },
+  "courts": [
+    {
+      "id": "uva-sheridan-snyder-tennis-center",
+      "name": "University of Virginia - Sheridan Snyder Tennis Center",
+      "address": "210 Emmet St S, Charlottesville, VA, 22903, USA",
+      "cost": {
+        "category": "free",
+        "label": "Free"
+      },
+      "courtCount": 7,
+      "netType": "non_permanent",
+      "categories": [
+        "free",
+        "non_permanent_nets"
+      ],
+      "bounceUrl": "https://www.bounce.game/court/university-of-virginia-sheridan-snyder-tennis-center-charlottesville-virginia-us",
+      "imageUrl": "https://files.bounceassets.com/images/venues/6701db95eb57b216239e2c6b5bc18a734d905080.png",
+      "coords": {
+        "lat": 38.03735,
+        "lng": -78.507231
+      }
+    },
+    {
+      "id": "brooks-family-ymca",
+      "name": "Brooks Family YMCA",
+      "address": "151 McIntire Park Dr, Charlottesville, VA, 22902, USA",
+      "cost": {
+        "category": "membership",
+        "label": "Membership"
+      },
+      "courtCount": 2,
+      "netType": "non_permanent",
+      "categories": [
+        "membership",
+        "non_permanent_nets"
+      ],
+      "bounceUrl": "https://www.bounce.game/court/brooks-family-ymca-charlottesville-virginia-us",
+      "imageUrl": "https://files.bounceassets.com/images/venues/9c11c80b51e392d4290ea20e61bd9e17ef2afb48.jpg",
+      "coords": {
+        "lat": 38.049136,
+        "lng": -78.478602
+      }
+    },
+    {
+      "id": "herman-key-jr-recreation-center",
+      "name": "Herman Key Jr Recreation Center",
+      "address": "800 East Market Street, Charlottesville, Virginia 22902, United States",
+      "cost": {
+        "category": "one_time_fee",
+        "label": "One-time fee"
+      },
+      "courtCount": 3,
+      "netType": "non_permanent",
+      "categories": [
+        "one_time_fee",
+        "non_permanent_nets"
+      ],
+      "bounceUrl": "https://www.bounce.game/court/herman-key-jr-recreation-center-charlottesville-virginia-us",
+      "imageUrl": "https://files.bounceassets.com/images/venues/3c3bef285be8c8d4914ccdec28a7f128c927a706.jpg",
+      "coords": {
+        "lat": 38.02967,
+        "lng": -78.47605
+      }
+    },
+    {
+      "id": "key-recreation-center",
+      "name": "Key Recreation Center",
+      "address": "800 E Market St, Charlottesville, VA, 22902, USA",
+      "cost": {
+        "category": "one_time_fee",
+        "label": "One-time fee"
+      },
+      "courtCount": 3,
+      "netType": "non_permanent",
+      "categories": [
+        "one_time_fee",
+        "non_permanent_nets"
+      ],
+      "bounceUrl": "https://www.bounce.game/court/key-recreation-center-charlottesville-virginia-us",
+      "imageUrl": "https://files.bounceassets.com/images/venues/3b54119153c1961efdd6dd67b80789aa15e64d9c.jpg",
+      "coords": {
+        "lat": 38.029675,
+        "lng": -78.47605
+      }
+    },
+    {
+      "id": "laurel-hill-baptist-church",
+      "name": "Laurel Hill Baptist Church",
+      "address": "3595 Grand Forks Blvd, Charlottesville, VA, 22911, USA",
+      "cost": {
+        "category": "membership",
+        "label": "Membership"
+      },
+      "courtCount": 3,
+      "netType": "non_permanent",
+      "categories": [
+        "membership",
+        "non_permanent_nets"
+      ],
+      "bounceUrl": "https://www.bounce.game/court/laurel-hill-baptist-church-charlottesville-virginia-us",
+      "imageUrl": "https://files.bounceassets.com/images/venues/e696652f9a83389d8e988228f14ed6b6c521b0ed.jpg",
+      "coords": {
+        "lat": 38.13495,
+        "lng": -78.441834
+      }
+    },
+    {
+      "id": "piedmont-va-community-college",
+      "name": "Piedmont VA Community College",
+      "address": "501 College Dr, Charlottesville, VA, 22902, USA",
+      "cost": {
+        "category": "free",
+        "label": "Free"
+      },
+      "courtCount": 8,
+      "netType": "non_permanent",
+      "categories": [
+        "free",
+        "non_permanent_nets"
+      ],
+      "bounceUrl": "https://www.bounce.game/court/piedmont-va-community-college-charlottesville-virginia-us",
+      "imageUrl": "https://files.bounceassets.com/images/venues/6608c94b1e602a578b22946d7339562ca90f79bc.png",
+      "coords": {
+        "lat": 38.006919,
+        "lng": -78.483373
+      }
+    },
+    {
+      "id": "darden-towe-park",
+      "name": "Darden Towe Park",
+      "address": "1445 Darden Towe Park, Charlottesville, VA, 22911, USA",
+      "cost": {
+        "category": "free",
+        "label": "Free"
+      },
+      "courtCount": 6,
+      "netType": "permanent",
+      "categories": [
+        "free",
+        "permanent_nets"
+      ],
+      "bounceUrl": "https://www.bounce.game/court/darden-towe-park-charlottesville-virginia-us",
+      "imageUrl": "https://files.bounceassets.com/images/venues/ef37ee11b4af9a3411589dcc1c007321d349ba00.png",
+      "coords": {
+        "lat": 38.042775,
+        "lng": -78.451359
+      }
+    },
+    {
+      "id": "charlottesville-high-school",
+      "name": "Charlottesville High School",
+      "address": "1400 Melbourne Rd, Charlottesville, VA, 22901, USA",
+      "cost": {
+        "category": "free",
+        "label": "Free"
+      },
+      "courtCount": 2,
+      "netType": "non_permanent",
+      "categories": [
+        "free",
+        "non_permanent_nets"
+      ],
+      "bounceUrl": "https://www.bounce.game/court/high-school-charlottesville-virginia-us",
+      "imageUrl": "https://files.bounceassets.com/images/venues/51a38e462608aa4a0133ce4e375671d75909cf59.png",
+      "coords": {
+        "lat": 38.052489,
+        "lng": -78.475702
+      }
+    },
+    {
+      "id": "greencroft-club",
+      "name": "Greencroft Club",
+      "address": "575 Rodes Dr, Charlottesville, VA, 22903, USA",
+      "cost": {
+        "category": "one_time_fee",
+        "label": "One-time fee"
+      },
+      "courtCount": 8,
+      "netType": "permanent",
+      "categories": [
+        "one_time_fee",
+        "permanent_nets"
+      ],
+      "bounceUrl": "https://www.bounce.game/court/greencroft-club-charlottesville-virginia-us",
+      "imageUrl": "https://files.bounceassets.com/images/venues/c4f9cc8877a366009e306ab20bd1ace5a845f84a.png",
+      "coords": {
+        "lat": 38.053982,
+        "lng": -78.585037
+      }
+    },
+    {
+      "id": "key-west-club",
+      "name": "Key West Club",
+      "address": "393 Dr Key W, Charlottesville, VA, 22911, USA",
+      "cost": {
+        "category": "membership",
+        "label": "Membership"
+      },
+      "courtCount": 3,
+      "netType": "permanent",
+      "categories": [
+        "membership",
+        "permanent_nets"
+      ],
+      "bounceUrl": "https://www.bounce.game/court/key-west-club-charlottesville-virginia-us",
+      "imageUrl": "https://files.bounceassets.com/images/venues/5f121caa4ca5031a8f2565109b34e7e02b2e3700.png",
+      "coords": {
+        "lat": 38.061399,
+        "lng": -78.449319
+      }
+    },
+    {
+      "id": "acac-fitness-and-wellness-center-albemarle-square",
+      "name": "ACAC Fitness & Wellness Center- Albemarle Square",
+      "address": "500 Albemarle Sq, Charlottesville, VA, 22901, USA",
+      "cost": {
+        "category": "one_time_fee",
+        "label": "One-time fee"
+      },
+      "courtCount": 3,
+      "netType": "non_permanent",
+      "categories": [
+        "one_time_fee",
+        "non_permanent_nets"
+      ],
+      "bounceUrl": "https://www.bounce.game/court/acac-fitness-and-wellness-center-albemarle-square-charlottesville-virginia-us",
+      "imageUrl": "https://files.bounceassets.com/images/venues/aa30fd894cd88ed67a57d386344ba8e8d238274d.jpg",
+      "coords": {
+        "lat": 38.08292,
+        "lng": -78.47043
+      }
+    },
+    {
+      "id": "pen-park",
+      "name": "Pen Park",
+      "address": "1300 Pen Park Rd, Charlottesville, VA, 22901, USA",
+      "cost": {
+        "category": "free",
+        "label": "Free"
+      },
+      "courtCount": 4,
+      "netType": "permanent",
+      "categories": [
+        "free",
+        "permanent_nets"
+      ],
+      "bounceUrl": "https://www.bounce.game/court/pen-park-charlottesville-virginia-us",
+      "imageUrl": "https://files.bounceassets.com/images/venues/cfe1c019ae588082e21c53ee411e16f7e13752ab.png",
+      "coords": {
+        "lat": 38.050127,
+        "lng": -78.451635
+      }
+    },
+    {
+      "id": "forest-lakes-south",
+      "name": "Forest Lakes South",
+      "address": "1650 Ashwood Blvd, Charlottesville, VA, 22911, USA",
+      "cost": {
+        "category": "membership",
+        "label": "Membership"
+      },
+      "courtCount": 2,
+      "netType": "permanent",
+      "categories": [
+        "membership",
+        "permanent_nets"
+      ],
+      "bounceUrl": "https://www.bounce.game/court/forest-lakes-south-charlottesville-virginia-us",
+      "imageUrl": "https://files.bounceassets.com/images/venues/eea04512935cecee84395198480ba73fc495cb66.png",
+      "coords": {
+        "lat": 38.108863,
+        "lng": -78.440283
+      }
+    },
+    {
+      "id": "boars-head-sports-club",
+      "name": "Boar's Head Sports Club",
+      "address": "200 Wellington Dr, Charlottesville, VA, 22903, USA",
+      "cost": {
+        "category": "membership",
+        "label": "Membership"
+      },
+      "courtCount": 7,
+      "netType": "permanent",
+      "categories": [
+        "membership",
+        "permanent_nets"
+      ],
+      "bounceUrl": "https://www.bounce.game/court/boars-head-sports-club-charlottesville-virginia-us",
+      "imageUrl": "https://files.bounceassets.com/images/venues/d7ebc2529cf27e9282b160a99437fae47e3c9adf.png",
+      "coords": {
+        "lat": 38.04623,
+        "lng": -78.539002
+      }
+    },
+    {
+      "id": "agnor-hurt-elementary-school-gym",
+      "name": "Agnor Hurt Elementary School Gym",
+      "address": "3201 Berkmar Dr, Charlottesville, VA, 22901, USA",
+      "cost": {
+        "category": "one_time_fee",
+        "label": "One-time fee"
+      },
+      "courtCount": 3,
+      "netType": "non_permanent",
+      "categories": [
+        "one_time_fee",
+        "non_permanent_nets"
+      ],
+      "bounceUrl": "https://www.bounce.game/court/agnor-hurt-elementary-school-gym-charlottesville-virginia-us",
+      "imageUrl": "https://files.bounceassets.com/images/venues/b772a634a8f842951675144db10dd36c92c4768c.jpg",
+      "coords": {
+        "lat": 38.089642,
+        "lng": -78.476912
+      }
+    }
+  ]
+}

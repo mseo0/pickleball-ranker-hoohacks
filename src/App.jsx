@@ -4,6 +4,7 @@ import Sidebar from './components/layout/Sidebar'
 import TopBar from './components/layout/TopBar'
 import { useTheme } from './hooks/useTheme'
 import CommunityPage from './pages/CommunityPage'
+import CourtsMapPage from './pages/CourtsMapPage'
 import HealthPage from './pages/HealthPage'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
@@ -12,6 +13,7 @@ const pageTitles = {
   '/': 'Dashboard',
   '/health': 'Health',
   '/community': 'Community',
+  '/courts': 'Courts',
 }
 
 function LoadingScreen() {
@@ -36,6 +38,7 @@ function MainApp() {
         <TopBar currentUser={currentUser} pageTitle={pageTitle} theme={theme} setTheme={setTheme} />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/courts" element={<CourtsMapPage />} />
           <Route path="/health" element={<HealthPage />} />
           <Route path="/community" element={<CommunityPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />

@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import GlobalMatchmakingPanel from '../components/community/GlobalMatchmakingPanel'
 import YourCommunitiesGrid from '../components/community/YourCommunitiesGrid'
 import ClubQuickStats from '../components/community/ClubQuickStats'
@@ -9,6 +10,7 @@ import { mockCommunities } from '../data/mockCommunities'
 import { mockMembers } from '../data/mockMembers'
 import { mockEvents } from '../data/mockEvents'
 import { mockActivity } from '../data/mockActivity'
+import { mockMatchResult } from '../data/mockMatch'
 
 const userElo = 5600
 
@@ -23,6 +25,7 @@ function toggleFromArray(values, id) {
 }
 
 function CommunityPage() {
+  const navigate = useNavigate()
   const [poolScope, setPoolScope] = useState('anyone')
   const [selectedCommunities, setSelectedCommunities] = useState(['cville', 'sunday'])
   const [matchTypes, setMatchTypes] = useState(['rated', 'unrated', 'doubles'])
@@ -32,6 +35,31 @@ function CommunityPage() {
   const [selectedSlots, setSelectedSlots] = useState(['10am', '12pm', '4pm'])
   const [eloRangeDelta, setEloRangeDelta] = useState(150)
   const [isAdjustingRange, setIsAdjustingRange] = useState(false)
+  const [isSearchingMatch, setIsSearchingMatch] = useState(false)
+  const [searchElapsed, setSearchElapsed] = useState(0)
+
+  useEffect(() => {
+    if (!isSearchingMatch) {
+      setSearchElapsed(0)
+      return undefined
+    }
+
+    const interval = setInterval(() => {
+      setSearchElapsed((prev) => prev + 1)
+    }, 1000)
+
+    const timer = setTimeout(() => {
+      localStorage.setItem('pr_match_state', 'confirmed')
+      localStorage.setItem('pr_current_match', JSON.stringify(mockMatchResult))
+      setIsSearchingMatch(false)
+      navigate('/')
+    }, 5000)
+
+    return () => {
+      clearInterval(interval)
+      clearTimeout(timer)
+    }
+  }, [isSearchingMatch, navigate])
 
   const handleAdjustRange = (nextRange) => {
     setEloRangeDelta(nextRange)
@@ -40,6 +68,8 @@ function CommunityPage() {
   }
 
   const handleFindMatch = () => {
+    if (isSearchingMatch) return
+
     const matchRequest = {
       poolScope,
       communities: selectedCommunities,
@@ -53,6 +83,9 @@ function CommunityPage() {
     }
 
     console.log(matchRequest)
+    localStorage.setItem('pr_match_state', 'searching')
+    localStorage.removeItem('pr_current_match')
+    setIsSearchingMatch(true)
   }
 
   return (
@@ -80,6 +113,8 @@ function CommunityPage() {
           selectedSlots={selectedSlots}
           toggleSlot={(id) => setSelectedSlots((prev) => toggleFromArray(prev, id))}
           onFindMatch={handleFindMatch}
+          isSearching={isSearchingMatch}
+          searchElapsed={searchElapsed}
         />
 
         <YourCommunitiesGrid communities={mockCommunities} />

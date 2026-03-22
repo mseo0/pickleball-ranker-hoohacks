@@ -1,0 +1,28 @@
+export const mockMatchResult = {
+  opponent: {
+    id: 'u_jrivera',
+    name: 'J. Rivera',
+    avatar: 'JR',
+    eloRating: 1802,
+    rank: 'Gold II',
+    winRate: 61,
+    recentForm: ['W', 'W', 'L', 'W', 'W'],
+    headToHead: { wins: 1, losses: 1 },
+    avgMatchMins: 52,
+    avatarColor: '#60a5fa',
+    avatarBg: 'rgba(96,165,250,0.15)',
+  },
+  matchQuality: 91,
+  court: {
+    name: 'Pen Park',
+    courtNum: 2,
+    distMiles: 0.8,
+    mapsUrl: 'https://maps.apple.com/?q=Pen+Park+Charlottesville',
+  },
+  scheduledTime: '3:30 PM',
+  scheduledDate: 'Today',
+  durationMins: 60,
+  eloStake: 18,
+  format: 'Singles',
+  bestOf: 3,
+}

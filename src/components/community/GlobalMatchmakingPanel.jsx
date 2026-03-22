@@ -38,6 +38,8 @@ function GlobalMatchmakingPanel({
   selectedSlots,
   toggleSlot,
   onFindMatch,
+  isSearching = false,
+  searchElapsed = 0,
 }) {
   const poolLabel =
     poolScope === 'anyone'
@@ -157,7 +159,34 @@ function GlobalMatchmakingPanel({
         />
       </div>
 
-      <FindMatchButton summary={summary} onClick={onFindMatch} />
+      <FindMatchButton
+        summary={
+          isSearching
+            ? `Searching nearby players... ${Math.floor(searchElapsed / 60)}:${String(searchElapsed % 60).padStart(2, '0')}`
+            : summary
+        }
+        onClick={onFindMatch}
+      />
+
+      {isSearching ? (
+        <div className="rounded-[12px] border border-[rgba(200,241,53,0.14)] bg-[rgba(200,241,53,0.06)] px-[14px] py-[12px]">
+          <div className="flex items-center justify-between gap-[10px]">
+            <div>
+              <div className="text-[12px] font-semibold text-[var(--accent)]">Queueing for a match</div>
+              <div className="mt-[2px] text-[11px] text-[var(--muted)]">
+                Finding the best nearby player and confirming automatically.
+              </div>
+            </div>
+            <div className="rounded-full bg-[rgba(200,241,53,0.12)] px-[10px] py-[5px] text-[11px] font-semibold text-[var(--accent)]">
+              {Math.floor(searchElapsed / 60)}:{String(searchElapsed % 60).padStart(2, '0')}
+            </div>
+          </div>
+
+          <div className="mt-[10px] h-[6px] overflow-hidden rounded-full bg-[rgba(255,255,255,0.06)]">
+            <div className="searching-progress h-full w-[32%] rounded-full bg-[var(--accent)]" />
+          </div>
+        </div>
+      ) : null}
     </section>
   )
 }

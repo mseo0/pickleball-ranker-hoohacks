@@ -148,3 +148,17 @@ svg {
 .court-list-flash {
   animation: courtListFlash 1.2s ease-out;
 }
+
+@keyframes searchingProgress {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(320%);
+  }
+}
+
+.searching-progress {
+  animation: searchingProgress 1.8s ease-in-out infinite;
+}

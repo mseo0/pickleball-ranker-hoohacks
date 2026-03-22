@@ -8,11 +8,13 @@ import LocalLeaderboard from '../components/home/LocalLeaderboard'
 import NearbyCourts from '../components/home/NearbyCourts'
 import RecentMatches from '../components/home/RecentMatches'
 import StatsRow from '../components/home/StatsRow'
+import UpcomingMatchCard from '../components/home/UpcomingMatchCard'
 
 function HomePage() {
   const { currentUser } = useAuth()
   const { courts, locationStatus, isUsingPreciseLocation } = useCourtData()
   const [users, setUsers] = useState([])
+  const [currentMatch, setCurrentMatch] = useState(null)
 
   // Gemini / health advice + recovery score from backend snapshot
   const [recoveryScore, setRecoveryScore] = useState(null)
@@ -41,6 +43,21 @@ function HomePage() {
 
     return () => {
       cancelled = true
+    }
+  }, [])
+
+  useEffect(() => {
+    try {
+      const savedState = localStorage.getItem('pr_match_state')
+      const savedMatch = localStorage.getItem('pr_current_match')
+      if (savedState === 'confirmed' && savedMatch) {
+        setCurrentMatch(JSON.parse(savedMatch))
+      } else {
+        setCurrentMatch(null)
+      }
+    } catch (error) {
+      console.error(error)
+      setCurrentMatch(null)
     }
   }, [])
 
@@ -97,6 +114,7 @@ function HomePage() {
     <div className="grid gap-[18px] px-5 py-5 sm:px-7 xl:grid-cols-[minmax(0,1fr)_340px]">
       <div className="flex flex-col gap-[18px]">
         <EloHero />
+        {currentMatch ? <UpcomingMatchCard match={currentMatch} /> : null}
         <StatsRow localRank={currentUserRank} matches={currentUserMatches} />
         <HealthNudge recoveryScore={recoveryScore ?? 0} advice={advice} />
         <RecentMatches matches={currentUserMatches.slice(0, 5)} />

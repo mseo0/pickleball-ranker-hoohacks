@@ -8,6 +8,14 @@ function UpcomingEvents({ events }) {
         <div style={{ fontSize: '11px', color: '#C8F135', cursor: 'pointer' }}>+ Add</div>
       </div>
       <div className="flex flex-col gap-[8px]">
+        {events.length === 0 ? (
+          <div
+            className="px-[12px] py-[14px] text-[11px] text-[var(--muted)]"
+            style={{ background: '#142014', border: '1px solid rgba(200,241,53,0.12)', borderRadius: '12px' }}
+          >
+            No upcoming events right now.
+          </div>
+        ) : null}
         {events.map((event) => (
           <article
             key={`${event.day}-${event.title}`}

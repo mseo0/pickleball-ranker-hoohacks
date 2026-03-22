@@ -35,7 +35,7 @@ function Sidebar({ currentUser }) {
             <PickleballMark />
           </div>
           <span className="font-display text-[19px] tracking-[0.08em] text-[var(--accent)]">
-            PICKLERANK
+            PICKELO
           </span>
         </div>
       </div>

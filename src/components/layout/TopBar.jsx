@@ -22,6 +22,7 @@ function TopBar({ currentUser, pageTitle }) {
         {pageTitle === 'Community' ? (
           <button
             type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent('pr-open-create-community'))}
             style={{
               background: 'var(--accent)',
               color: 'var(--accent-dark)',

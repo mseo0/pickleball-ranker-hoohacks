@@ -52,7 +52,7 @@ function RecentActivity({ activity }) {
               <div className="text-[11px] leading-[1.4] text-[var(--text)]">
                 {item.text.map((part, idx) => {
                   const isHighlight =
-                    part === 'T. Kim' || part === 'S. Ramos' || part === 'M. Brown' || part === 'Weekly Tournament'
+                    ['Asia', 'Naython', 'Timothy', 'Leo', 'Zane'].includes(part)
                   return (
                     <span
                       key={`${part}-${idx}`}

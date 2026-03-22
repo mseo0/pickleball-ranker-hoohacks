@@ -1,11 +1,11 @@
-const stats = [
-  { value: '247', color: '#e8f0e8', label: 'Members' },
-  { value: '1642', color: '#C8F135', label: 'Avg ELO' },
-  { value: '38', color: '#e8f0e8', label: 'Active Today' },
-  { value: '94%', color: '#4ade80', label: 'Match Rate' },
-]
+function ClubQuickStats({ totalMembers = 0, avgElo = 0, activeToday = 0 }) {
+  const stats = [
+    { value: String(totalMembers), color: '#e8f0e8', label: 'Members' },
+    { value: String(avgElo), color: '#C8F135', label: 'Avg ELO' },
+    { value: String(activeToday), color: '#e8f0e8', label: 'Active Today' },
+    { value: '94%', color: '#4ade80', label: 'Match Rate' },
+  ]
 
-function ClubQuickStats() {
   return (
     <section className="flex flex-col gap-[10px]">
       <div className="flex items-center justify-between">

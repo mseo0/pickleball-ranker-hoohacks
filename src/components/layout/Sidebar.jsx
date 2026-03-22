@@ -1,4 +1,4 @@
-import { Grid2x2, Heart, Newspaper, ShoppingBag, Users } from 'lucide-react'
+import { Grid2x2, Heart, Users } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 
 const navGroups = [
@@ -8,13 +8,6 @@ const navGroups = [
       { to: '/', label: 'Home', icon: Grid2x2, end: true },
       { to: '/health', label: 'Health', icon: Heart },
       { to: '/community', label: 'Community', icon: Users },
-    ],
-  },
-  {
-    label: 'Store',
-    items: [
-      { to: '/gear', label: 'My Gear', icon: ShoppingBag },
-      { to: '/news', label: 'News & Market', icon: Newspaper },
     ],
   },
 ]

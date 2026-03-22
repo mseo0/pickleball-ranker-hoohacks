@@ -1,6 +1,6 @@
 import './style.css'
 
-type TabId = 'news' | 'gear' | 'home' | 'health' | 'community'
+type TabId = 'home' | 'health' | 'community'
 type ThemeMode = 'light' | 'dark'
 type HealthMetricKey = 'steps' | 'heartRate' | 'sleep' | 'activeEnergy' | 'hrv'
 
@@ -18,8 +18,6 @@ type HealthData = {
 }
 
 const tabs: Array<{ id: TabId; label: string; icon: string }> = [
-  { id: 'news', label: 'News', icon: '[]' },
-  { id: 'gear', label: 'Gear', icon: '▣' },
   { id: 'home', label: 'Home', icon: '⌂' },
   { id: 'health', label: 'Health', icon: '♡' },
   { id: 'community', label: 'Community', icon: '◌' },
@@ -441,56 +439,6 @@ const renderHome = () => {
   `
 }
 
-const renderNews = () => `
-  <section class="page">
-    <section class="card">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">News and marketplace</p>
-          <h1>What is moving in pickleball</h1>
-        </div>
-      </div>
-      <div class="grid two-up">
-        <article class="mini-card accent">
-          <p class="eyebrow">Headline</p>
-          <h3>Major city ladders are adding open-play ELO nights.</h3>
-          <p>Use this feed for fast updates, club announcements, and partnership drops.</p>
-        </article>
-        <article class="mini-card">
-          <p class="eyebrow">Marketplace</p>
-          <h3>Featured paddle: Carbon drive pro</h3>
-          <p>List used paddles, ball machines, and court gear inside the same local network.</p>
-        </article>
-      </div>
-    </section>
-  </section>
-`
-
-const renderGear = () => `
-  <section class="page">
-    <section class="card">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">Personal gear</p>
-          <h1>Your bag setup</h1>
-        </div>
-      </div>
-      <div class="grid two-up">
-        <article class="mini-card">
-          <p class="eyebrow">Primary paddle</p>
-          <h3>Selkirk control build</h3>
-          <p>Balanced face, fresh overgrip, and a note to recheck edge guard wear next week.</p>
-        </article>
-        <article class="mini-card accent">
-          <p class="eyebrow">Bag checklist</p>
-          <h3>Match day essentials</h3>
-          <p>Balls, tape, towels, electrolyte mix, and backup shoes all ready to go.</p>
-        </article>
-      </div>
-    </section>
-  </section>
-`
-
 const renderHealth = () => {
   const healthCards = state.healthData
     ? Object.values(state.healthData.metrics)
@@ -609,8 +557,6 @@ const renderCommunity = () => `
 `
 
 const renderPage = () => {
-  if (state.activeTab === 'news') return renderNews()
-  if (state.activeTab === 'gear') return renderGear()
   if (state.activeTab === 'health') return renderHealth()
   if (state.activeTab === 'community') return renderCommunity()
   return renderHome()

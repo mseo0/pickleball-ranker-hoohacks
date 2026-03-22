@@ -1,13 +1,10 @@
+import SectionHeader from '../layout/SectionHeader'
+
 function RecentMatches({ matches }) {
   return (
     <section className="rounded-[12px] border border-[var(--border)] bg-[var(--card)] px-5 py-[18px]">
-      <div className="mb-[10px] flex items-center justify-between">
-        <h2 className="font-display text-[15px] tracking-[0.06em] text-[var(--text)]">
-          Recent Matches
-        </h2>
-        <button type="button" className="text-[11px] text-[var(--accent)]">
-          See all →
-        </button>
+      <div className="mb-[10px]">
+        <SectionHeader title="RECENT MATCHES" />
       </div>
 
       {matches.map((match, index) => {

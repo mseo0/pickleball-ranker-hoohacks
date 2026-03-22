@@ -1,4 +1,4 @@
-function UpcomingMatchCard({ match }) {
+function UpcomingMatchCard({ match, onCancel }) {
   return (
     <section className="overflow-hidden rounded-[12px] border border-[var(--border)] bg-[var(--card)]">
       <div className="flex items-center justify-between bg-[rgba(200,241,53,0.08)] px-4 py-3">
@@ -46,6 +46,23 @@ function UpcomingMatchCard({ match }) {
             <div className="text-[10px] uppercase tracking-[0.06em] text-[var(--muted)]">ELO</div>
             <div className="mt-1 text-[12px] font-medium text-[var(--yellow)]">±{match.eloStake} pts</div>
           </div>
+        </div>
+
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={() => window.open(match.court.mapsUrl, '_blank', 'noopener,noreferrer')}
+            className="flex-1 rounded-[10px] bg-[var(--accent)] px-4 py-3 text-[12px] font-semibold text-[var(--accent-dark)]"
+          >
+            Get Directions
+          </button>
+          <button
+            type="button"
+            onClick={onCancel}
+            className="flex-1 rounded-[10px] border border-[rgba(248,113,113,0.24)] bg-[rgba(248,113,113,0.08)] px-4 py-3 text-[12px] font-semibold text-[#f87171]"
+          >
+            Cancel Match
+          </button>
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../auth/AuthContext'
 import { fetchUsers } from '../auth/authUtils'
 import GlobalMatchmakingPanel from '../components/community/GlobalMatchmakingPanel'
 import YourCommunitiesGrid from '../components/community/YourCommunitiesGrid'
@@ -10,7 +11,7 @@ import RecentActivity from '../components/community/RecentActivity'
 import { mockCommunities } from '../data/mockCommunities'
 import { mockEvents } from '../data/mockEvents'
 import { mockActivity } from '../data/mockActivity'
-import { mockMatchResult } from '../data/mockMatch'
+import { buildLocalMatchResult } from '../data/mockMatch'
 
 const userElo = 5600
 
@@ -26,6 +27,7 @@ function toggleFromArray(values, id) {
 
 function CommunityPage() {
   const navigate = useNavigate()
+  const { currentUser } = useAuth()
   const [users, setUsers] = useState([])
   const [customCommunities, setCustomCommunities] = useState([])
   const [showCreateCommunity, setShowCreateCommunity] = useState(false)
@@ -96,8 +98,9 @@ function CommunityPage() {
     }, 1000)
 
     const timer = setTimeout(() => {
+      const nextMatch = buildLocalMatchResult(users, currentUser)
       localStorage.setItem('pr_match_state', 'confirmed')
-      localStorage.setItem('pr_current_match', JSON.stringify(mockMatchResult))
+      localStorage.setItem('pr_current_match', JSON.stringify(nextMatch))
       setIsSearchingMatch(false)
       navigate('/')
     }, 5000)
@@ -106,7 +109,7 @@ function CommunityPage() {
       clearInterval(interval)
       clearTimeout(timer)
     }
-  }, [isSearchingMatch, navigate])
+  }, [currentUser, isSearchingMatch, navigate, users])
 
   const handleAdjustRange = (nextRange) => {
     setEloRangeDelta(nextRange)

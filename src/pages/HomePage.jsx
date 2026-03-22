@@ -9,6 +9,7 @@ import NearbyCourts from '../components/home/NearbyCourts'
 import RecentMatches from '../components/home/RecentMatches'
 import StatsRow from '../components/home/StatsRow'
 import UpcomingMatchCard from '../components/home/UpcomingMatchCard'
+import { buildLocalMatchResult } from '../data/mockMatch'
 
 function HomePage() {
   const { currentUser } = useAuth()
@@ -60,6 +61,17 @@ function HomePage() {
       setCurrentMatch(null)
     }
   }, [])
+
+  useEffect(() => {
+    if (!currentMatch || users.length === 0) return
+
+    const hasLocalOpponent = users.some((user) => user.id === currentMatch.opponent?.id)
+    if (!hasLocalOpponent) {
+      const nextMatch = buildLocalMatchResult(users, currentUser)
+      setCurrentMatch(nextMatch)
+      localStorage.setItem('pr_current_match', JSON.stringify(nextMatch))
+    }
+  }, [currentMatch, currentUser, users])
 
   // Fetch the latest snapshot once on mount.
   // Advice is generated and cached when new HealthKit data is uploaded.
@@ -114,7 +126,18 @@ function HomePage() {
     <div className="grid gap-[18px] px-5 py-5 sm:px-7 xl:grid-cols-[minmax(0,1fr)_340px]">
       <div className="flex flex-col gap-[18px]">
         <EloHero />
-        {currentMatch ? <UpcomingMatchCard match={currentMatch} /> : null}
+        {currentMatch ? (
+          <UpcomingMatchCard
+            match={currentMatch}
+            onCancel={() => {
+              if (window.confirm('Cancel this confirmed match?')) {
+                setCurrentMatch(null)
+                localStorage.removeItem('pr_match_state')
+                localStorage.removeItem('pr_current_match')
+              }
+            }}
+          />
+        ) : null}
         <StatsRow localRank={currentUserRank} matches={currentUserMatches} />
         <HealthNudge recoveryScore={recoveryScore ?? 0} advice={advice} />
         <RecentMatches matches={currentUserMatches.slice(0, 5)} />

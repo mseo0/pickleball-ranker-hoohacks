@@ -1,19 +1,12 @@
-import { useEffect, useState } from 'react'
-import { mockHealthData } from '../data/mockHealth'
+import { useEffect, useRef, useState } from 'react'
+// Remove mockHealthData; rely only on backend
+// import { mockHealthData } from '../data/mockHealth'
 
 function formatTime(seconds) {
   const h = String(Math.floor(seconds / 3600)).padStart(2, '0')
   const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0')
   const sec = String(seconds % 60).padStart(2, '0')
   return `${h}:${m}:${sec}`
-}
-
-function PlayIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-[22px] w-[22px] fill-[#0f1a0f] stroke-[#0f1a0f]">
-      <polygon points="6 3 20 12 6 21 6 3" />
-    </svg>
-  )
 }
 
 function BoltIcon({ stroke = '#C8F135', className = 'h-[12px] w-[12px]' }) {
@@ -119,115 +112,6 @@ function CheckCircleIcon() {
   )
 }
 
-function StartWorkoutButton({ onStart }) {
-  return (
-    <div
-      onClick={onStart}
-      className="relative flex cursor-pointer items-center justify-between overflow-hidden rounded-[14px] bg-[#C8F135] px-[20px] py-[16px]"
-    >
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(circle at 30% 50%, rgba(255,255,255,0.15), transparent 60%)',
-        }}
-      />
-
-      <div className="relative flex flex-col gap-[2px]">
-        <p className="font-display text-[22px] tracking-[0.04em] text-[#0f1a0f]">
-          Start Pickleball Workout
-        </p>
-        <p className="text-[11px] font-medium text-[rgba(15,26,15,0.65)]">
-          Track steps · heart rate · calories · time
-        </p>
-      </div>
-
-      <div className="relative flex h-[48px] w-[48px] items-center justify-center rounded-full bg-[rgba(15,26,15,0.18)]">
-        <PlayIcon />
-      </div>
-    </div>
-  )
-}
-
-function ActiveWorkoutCard({ elapsed, stats, paused, onPause, onStop }) {
-  const cells = [
-    {
-      icon: <BoltIcon stroke="#C8F135" />,
-      value: Math.round(stats.steps).toLocaleString(),
-      label: 'STEPS',
-      valueClass: 'text-[#e8f0e8]',
-    },
-    {
-      icon: <HeartIcon stroke="#f87171" />,
-      value: stats.bpm,
-      label: 'BPM',
-      valueClass: 'text-[#f87171]',
-    },
-    {
-      icon: <FireIcon stroke="#facc15" />,
-      value: Math.round(stats.calories),
-      label: 'CAL',
-      valueClass: 'text-[#facc15]',
-    },
-    {
-      icon: <WaveIcon stroke="#88b4ff" />,
-      value: stats.miles.toFixed(1),
-      label: 'MILES',
-      valueClass: 'text-[#88b4ff]',
-    },
-  ]
-
-  return (
-    <section className="rounded-[14px] border border-[rgba(200,241,53,0.25)] bg-[#162016] p-[14px]">
-      <div className="mb-[12px] flex items-center justify-between">
-        <p className="font-display text-[15px] tracking-[0.06em] text-[#C8F135]">
-          Pickleball Session
-        </p>
-        <div className="flex items-center gap-[6px]">
-          <span className="h-[7px] w-[7px] rounded-full bg-[#ef4444]" />
-          <span className="text-[10px] font-semibold text-[#ef4444]">LIVE</span>
-        </div>
-      </div>
-
-      <div className="mb-[12px] text-center font-display text-[44px] tracking-[0.06em] text-[#e8f0e8]">
-        {formatTime(elapsed)}
-      </div>
-
-      <div className="mb-[12px] grid grid-cols-4 gap-[6px]">
-        {cells.map((cell) => (
-          <div
-            key={cell.label}
-            className="flex flex-col items-center rounded-[8px] bg-[#1a2a1a] px-[6px] py-[8px] text-center"
-          >
-            {cell.icon}
-            <div className={`mt-[4px] font-display text-[18px] ${cell.valueClass}`}>{cell.value}</div>
-            <div className="mt-[1px] text-[8px] uppercase tracking-[0.06em] text-[#7a9a7a]">
-              {cell.label}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="flex gap-[8px]">
-        <button
-          type="button"
-          onClick={onStop}
-          className="flex-1 rounded-[9px] border border-[rgba(248,113,113,0.30)] bg-[rgba(248,113,113,0.12)] px-[9px] py-[9px] text-[12px] font-semibold text-[#f87171]"
-        >
-          Stop
-        </button>
-        <button
-          type="button"
-          onClick={onPause}
-          className="flex-1 rounded-[9px] border border-[rgba(200,241,53,0.25)] bg-[rgba(200,241,53,0.10)] px-[9px] py-[9px] text-[12px] font-semibold text-[#C8F135]"
-        >
-          {paused ? 'Resume' : 'Pause'}
-        </button>
-      </div>
-    </section>
-  )
-}
-
 function SectionHeader({ title, action }) {
   return (
     <div className="flex items-center justify-between">
@@ -263,9 +147,7 @@ function StatCard({ accentColor, iconBg, icon, value, unit, label, fillPct }) {
   )
 }
 
-function SleepSummaryCard() {
-  const { sleep } = mockHealthData
-
+function SleepSummaryCard({ sleep }) {
   return (
     <article className="relative overflow-hidden rounded-[11px] border border-[rgba(200,241,53,0.12)] bg-[#162016] px-[13px] py-[12px]">
       <div className="absolute bottom-0 right-0 top-0 w-[3px] bg-[#a78bfa]" />
@@ -301,8 +183,8 @@ function SleepSummaryCard() {
   )
 }
 
-function TodayStatsGrid() {
-  const today = mockHealthData.today
+function TodayStatsGrid({ health }) {
+  const today = health.today
 
   const caloriesData = {
     accentColor: '#facc15',
@@ -336,19 +218,19 @@ function TodayStatsGrid() {
 
   return (
     <section className="flex flex-col gap-[8px]">
-      <SectionHeader title="TODAY'S STATS" action="History →" />
+      <SectionHeader title="TODAY'S STATS" />
       <div className="grid grid-cols-2 gap-2">
         <StatCard {...caloriesData} />
         <StatCard {...stepsData} />
-        <SleepSummaryCard />
+        <SleepSummaryCard sleep={health.sleep} />
         <StatCard {...activeTimeData} />
       </div>
     </section>
   )
 }
 
-function HeartRateCard() {
-  const { heartRate } = mockHealthData
+function HeartRateCard({ health }) {
+  const { heartRate } = health
 
   return (
     <section className="rounded-[11px] border border-[rgba(200,241,53,0.12)] bg-[#162016] px-[14px] py-[12px]">
@@ -398,24 +280,12 @@ function HeartRateCard() {
         <span className="text-[#f97316]">Peak</span>
         <span className="text-[#ef4444]">Max</span>
       </div>
-
-      <svg viewBox="0 0 340 36" width="100%" height="36" className="mt-[6px]">
-        <polyline
-          points="0,28 20,24 40,20 60,22 80,16 100,10 120,14 140,8 160,12 180,18 200,14 220,20 240,16 260,22 280,18 300,24 320,20 340,16"
-          fill="none"
-          stroke="#f87171"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          opacity="0.7"
-        />
-      </svg>
     </section>
   )
 }
 
-function SleepCard() {
-  const { sleep } = mockHealthData
+function SleepCard({ health }) {
+  const { sleep } = health
 
   return (
     <section className="rounded-[11px] border border-[rgba(200,241,53,0.12)] bg-[#162016] px-[14px] py-[12px]">
@@ -485,8 +355,8 @@ function RecoveryMetricCard({ iconBg, icon, value, unit, label, status }) {
   )
 }
 
-function RecoveryRow() {
-  const { hrv, recovery } = mockHealthData
+function RecoveryRow({ health }) {
+  const { hrv, recovery } = health
 
   return (
     <div className="grid grid-cols-2 gap-[8px]">
@@ -511,64 +381,260 @@ function RecoveryRow() {
 }
 
 export default function HealthPage() {
-  const [workoutActive, setWorkoutActive] = useState(false)
-  const [workoutPaused, setWorkoutPaused] = useState(false)
-  const [elapsed, setElapsed] = useState(0)
-  const [liveStats, setLiveStats] = useState({
-    steps: 0,
-    bpm: 0,
-    calories: 0,
-    miles: 0,
-  })
+  const [healthData, setHealthData] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [uploading, setUploading] = useState(false)
+  const [uploadError, setUploadError] = useState(null)
+  const fileInputRef = useRef(null)
+
+  async function refreshHealthFromBackend() {
+    try {
+      const res = await fetch('/api/healthkit/latest')
+      if (!res.ok) {
+        if (res.status === 404) {
+          setHealthData(null)
+          setError(null)
+          return
+        }
+        throw new Error('Failed to fetch health data')
+      }
+
+      const json = await res.json()
+      const metrics = json.metrics || {}
+      const today = metrics.today || {}
+      const hasTodayMetrics = Boolean(today.steps || today.active_energy_burned)
+      const hasSleepMetric = typeof metrics.sleep?.value === 'number'
+      const hasHeartRateMetric = typeof metrics.heart_rate?.value === 'number'
+      const hasHrvMetric = typeof metrics.hrv?.value === 'number'
+
+      // Simple recovery score algorithm based on HRV and today's steps
+      function computeRecovery(metricsObj, todayObj) {
+        const hrvMetric = metricsObj.hrv
+        const stepsToday = todayObj.steps?.value ?? 0
+
+        // baseline
+        let score = 50
+
+        // HRV contribution (assuming 20–120 ms typical range)
+        if (hrvMetric && typeof hrvMetric.value === 'number') {
+          const hrv = hrvMetric.value
+          if (hrv >= 90) score += 25
+          else if (hrv >= 70) score += 15
+          else if (hrv >= 50) score += 5
+          else if (hrv < 30) score -= 10
+        }
+
+        // Activity contribution based on today's steps
+        if (stepsToday > 0) {
+          if (stepsToday >= 10000) score += 15
+          else if (stepsToday >= 7000) score += 8
+          else if (stepsToday >= 4000) score += 4
+          else if (stepsToday < 1500) score -= 5
+        }
+
+        // clamp 0–100
+        score = Math.max(0, Math.min(100, Math.round(score)))
+
+        let status
+        if (score >= 80) status = 'Ready to play'
+        else if (score >= 60) status = 'Moderate'
+        else if (score >= 40) status = 'Take it easy'
+        else status = 'Rest day'
+
+        return { value: score, unit: '%', status }
+      }
+
+      const mapped = {
+        // --- TODAY (only use metrics.today from backend) ---
+        today:
+          hasTodayMetrics
+            ? {
+                calories: today.active_energy_burned
+                  ? {
+                      // backend is kcal → convert to calories
+                      value: Math.round((today.active_energy_burned.value ?? 0) * 1000),
+                      unit: 'cal',
+                      pct: 75,
+                    }
+                  : {
+                      value: 0,
+                      unit: 'cal',
+                      pct: 0,
+                    },
+                steps: today.steps
+                  ? {
+                      value: Math.round(today.steps.value ?? 0),
+                      unit: today.steps.unit || 'steps',
+                      pct: 80,
+                    }
+                  : {
+                      value: 0,
+                      unit: 'steps',
+                      pct: 0,
+                    },
+                active: {
+                  // rough estimate for active minutes from today steps
+                  value: `${Math.max(1, Math.round((today.steps?.value ?? 0) / 100))}`,
+                  unit: 'min',
+                  pct: 60,
+                },
+              }
+            : {
+                calories: { value: 0, unit: 'cal', pct: 0 },
+                steps: { value: 0, unit: 'steps', pct: 0 },
+                active: { value: '0', unit: 'min', pct: 0 },
+              },
+
+        // --- HEART RATE (all‑time avg from backend metric) ---
+        heartRate: hasHeartRateMetric
+          ? {
+              avg: Math.round(metrics.heart_rate.value ?? 0),
+              min: Math.round((metrics.heart_rate.value ?? 0) * 0.7),
+              max: Math.round((metrics.heart_rate.value ?? 0) * 1.3),
+              zone: 'Cardio',
+            }
+          : {
+              avg: 0,
+              min: 0,
+              max: 0,
+              zone: 'Unknown',
+            },
+
+        // --- SLEEP (use backend sleep metric hours, but still treat as one summary) ---
+        sleep: hasSleepMetric
+          ? {
+              // backend sleep.value is total hours; clamp to a reasonable display range
+              hours: Math.min(12, Math.max(3, Math.round((metrics.sleep.value ?? 0) % 24))),
+              minutes: 0,
+              quality: 'Good',
+              score: 82,
+            }
+          : {
+              hours: 0,
+              minutes: 0,
+              quality: 'No data',
+              score: 0,
+            },
+
+        // --- HRV ---
+        hrv: hasHrvMetric
+          ? {
+              value: Math.round(metrics.hrv.value ?? 0),
+              unit: metrics.hrv.unit || 'ms',
+              status: 'Stable',
+            }
+          : { value: 0, unit: 'ms', status: 'No data' },
+
+        // --- RECOVERY (computed from metrics + today) ---
+        recovery: computeRecovery(metrics, today),
+      }
+
+      setHealthData(mapped)
+      setError(null)
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Failed to load health data')
+      setHealthData(null)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    if (!workoutActive || workoutPaused) return undefined
+    refreshHealthFromBackend()
+  }, [])
 
-    const id = window.setInterval(() => {
-      setElapsed((s) => s + 1)
-      setLiveStats((prev) => ({
-        steps: prev.steps + Math.floor(Math.random() * 3 + 1),
-        bpm: 120 + Math.floor(Math.random() * 30),
-        calories: prev.calories + Math.random() * 0.15,
-        miles: prev.miles + 0.0003,
-      }))
-    }, 1000)
+  async function handleFileChange(event) {
+    const file = event.target.files?.[0]
+    if (!file) return
 
-    return () => clearInterval(id)
-  }, [workoutActive, workoutPaused])
+    setUploadError(null)
+    setUploading(true)
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const res = await fetch('/api/healthkit/upload-xml', {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.error || 'Failed to upload Apple Health export')
+      }
+
+      // refresh metrics from backend
+      await refreshHealthFromBackend()
+    } catch (e) {
+      setUploadError(e instanceof Error ? e.message : 'Upload failed')
+    } finally {
+      setUploading(false)
+      if (event.target) {
+        event.target.value = ''
+      }
+    }
+  }
+
+  function handleSelectFile() {
+    if (fileInputRef.current) {
+      fileInputRef.current.click()
+    }
+  }
 
   return (
     <main className="flex flex-1 flex-col gap-[12px] overflow-y-auto bg-[#0f1a0f] px-[14px] py-[8px]">
-      {!workoutActive ? (
-        <StartWorkoutButton
-          onStart={() => {
-            setWorkoutActive(true)
-            setWorkoutPaused(false)
-            setElapsed(0)
-            setLiveStats({ steps: 0, bpm: 142, calories: 0, miles: 0 })
-          }}
+      {/* Apple Health upload / status section */}
+      <section className="rounded-[11px] border border-[rgba(200,241,53,0.25)] bg-[#162016] px-[14px] py-[10px]">
+        <div className="flex items-center justify-between gap-[8px]">
+          <div className="min-w-0">
+            <p className="text-[10px] uppercase tracking-[0.08em] text-[#7a9a7a]">Apple Health</p>
+            <p className="text-[12px] text-[#e8f0e8]">
+              {loading
+                ? 'Loading your latest Health data...'
+                : !healthData
+                  ? 'No Apple Health data yet. Import an export.xml file to see your real stats.'
+                  : 'Using your latest Apple Health snapshot.'}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={handleSelectFile}
+            className="shrink-0 rounded-[999px] border border-[rgba(200,241,53,0.35)] bg-[rgba(200,241,53,0.12)] px-[10px] py-[6px] text-[11px] font-semibold text-[#C8F135]"
+            disabled={uploading}
+          >
+            {uploading ? 'Uploading...' : 'Import XML'}
+          </button>
+        </div>
+        {uploadError ? (
+          <p className="mt-[4px] text-[10px] text-[#f87171]">{uploadError}</p>
+        ) : null}
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept=".xml,text/xml,application/xml"
+          className="hidden"
+          onChange={handleFileChange}
         />
+      </section>
+
+      {error ? (
+        <section className="rounded-[11px] border border-[rgba(248,113,113,0.22)] bg-[rgba(90,22,22,0.55)] px-[14px] py-[10px]">
+          <p className="text-[11px] font-semibold text-[#fca5a5]">Unable to load health metrics</p>
+          <p className="mt-[3px] text-[11px] text-[#fecaca]">{error}</p>
+        </section>
       ) : null}
 
-      {workoutActive ? (
-        <ActiveWorkoutCard
-          elapsed={elapsed}
-          stats={liveStats}
-          paused={workoutPaused}
-          onPause={() => setWorkoutPaused((p) => !p)}
-          onStop={() => {
-            setWorkoutActive(false)
-            setWorkoutPaused(false)
-            setElapsed(0)
-            setLiveStats({ steps: 0, bpm: 0, calories: 0, miles: 0 })
-          }}
-        />
+      {/* Only show aggregated health stats when real data is available */}
+      {healthData ? (
+        <>
+          <TodayStatsGrid health={healthData} />
+          <HeartRateCard health={healthData} />
+          <SleepCard health={healthData} />
+          <RecoveryRow health={healthData} />
+        </>
       ) : null}
 
-      <TodayStatsGrid />
-      <HeartRateCard />
-      <SleepCard />
-      <RecoveryRow />
       <div className="h-2" />
     </main>
   )

@@ -16,10 +16,15 @@ def get_gemini_response(prompt: str, api_key: str = None) -> str:
         api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         raise ValueError("Gemini API key not provided. Set GEMINI_API_KEY env var or pass as argument.")
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('gemini-2.5-flash-lite')
-    response = model.generate_content(prompt)
-    return response.text
+    
+    client = genai.Client(api_key=api_key)
+
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt,
+    )
+
+    return getattr(response, "text", str(response))
 
 def get_mayo_clinic_info(topic: str, keywords: list[str]) -> str:
     """

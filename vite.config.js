@@ -49,4 +49,13 @@ function localAuthPlugin() {
 
 export default defineConfig({
   plugins: [react(), tailwindcss(), localAuthPlugin()],
+  server: {
+    port: 5176,
+    proxy: {
+      '/api/healthkit': {
+        target: 'http://127.0.0.1:5000',
+        changeOrigin: true,
+      },
+    },
+  },
 })

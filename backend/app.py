@@ -46,6 +46,10 @@ def upload_apple_health_export():
 
     try:
         snapshot = parse_healthkit_export(temp_path)
+        try:
+            snapshot["advice"] = get_pickleball_advice_from_healthkit(snapshot)
+        except Exception:
+            snapshot["advice"] = None
         save_healthkit_snapshot(snapshot)
         return jsonify(snapshot)
     except HealthKitParseError as exc:
@@ -62,6 +66,10 @@ def sync_mobile_healthkit_payload():
 
     try:
         snapshot = normalize_mobile_healthkit_payload(payload)
+        try:
+            snapshot["advice"] = get_pickleball_advice_from_healthkit(snapshot)
+        except Exception:
+            snapshot["advice"] = None
         save_healthkit_snapshot(snapshot)
         return jsonify(snapshot)
     except HealthKitParseError as exc:
@@ -70,23 +78,12 @@ def sync_mobile_healthkit_payload():
 
 @app.get("/api/healthkit/pickleball-advice")
 def get_pickleball_advice():
-    """
-    Returns 1-3 sentences of feedback on the latest HealthKit metrics for pickleball improvement.
-    """
+    """Return cached pickleball advice generated when the latest snapshot was ingested."""
     snapshot = load_healthkit_snapshot()
     if snapshot is None or not snapshot.get("metrics"):
         return jsonify({"error": "No HealthKit data has been ingested yet."}), 404
-    # Save metrics to a temp file to reuse the XML-based function
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".json") as temp_file:
-        temp_path = Path(temp_file.name)
-        temp_file.write(json.dumps(snapshot).encode("utf-8"))
-    try:
-        # Prompt Gemini for concise advice
-        api_key = request.args.get("api_key")  # Optionally allow API key via query param
-        advice = get_pickleball_advice_from_healthkit(temp_path, api_key=api_key)
-        return jsonify({"advice": advice})
-    finally:
-        temp_path.unlink(missing_ok=True)
+
+    return jsonify({"advice": snapshot.get("advice")})
 
 
 if __name__ == "__main__":

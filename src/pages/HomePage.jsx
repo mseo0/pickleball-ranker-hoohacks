@@ -8,15 +8,20 @@ import LocalLeaderboard from '../components/home/LocalLeaderboard'
 import NearbyCourts from '../components/home/NearbyCourts'
 import RecentMatches from '../components/home/RecentMatches'
 import StatsRow from '../components/home/StatsRow'
-import { mockHealth } from '../data/mockHealth'
 
 function HomePage() {
   const { currentUser } = useAuth()
   const { courts, locationStatus, isUsingPreciseLocation } = useCourtData()
   const [users, setUsers] = useState([])
-  const nearbyCourts = isUsingPreciseLocation || locationStatus === 'denied' || locationStatus === 'unsupported'
-    ? courts.slice(0, 3)
-    : []
+
+  // Gemini / health advice + recovery score from backend snapshot
+  const [recoveryScore, setRecoveryScore] = useState(null)
+  const [advice, setAdvice] = useState(null)
+
+  const nearbyCourts =
+    isUsingPreciseLocation || locationStatus === 'denied' || locationStatus === 'unsupported'
+      ? courts.slice(0, 3)
+      : []
 
   useEffect(() => {
     let cancelled = false
@@ -33,6 +38,36 @@ function HomePage() {
     }
 
     loadUsers()
+
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  // Fetch the latest snapshot once on mount.
+  // Advice is generated and cached when new HealthKit data is uploaded.
+  useEffect(() => {
+    let cancelled = false
+
+    async function loadHealthAndAdvice() {
+      try {
+        const latestRes = await fetch('/api/healthkit/latest')
+        if (latestRes.ok) {
+          const latest = await latestRes.json()
+          const recoveryMetric = latest.metrics?.recovery
+          if (!cancelled && recoveryMetric && typeof recoveryMetric.value === 'number') {
+            setRecoveryScore(recoveryMetric.value)
+          }
+          if (!cancelled) {
+            setAdvice(latest.advice || null)
+          }
+        }
+      } catch (error) {
+        console.error('Failed to load health advice', error)
+      }
+    }
+
+    loadHealthAndAdvice()
 
     return () => {
       cancelled = true
@@ -56,20 +91,22 @@ function HomePage() {
   )
   const currentUserMatches = users.find((user) => user.id === currentUser?.id)?.recentMatches ?? []
 
-  const currentUserRank =
-    leaderboardEntries.find((entry) => entry.isMe)?.rank ?? 1
+  const currentUserRank = leaderboardEntries.find((entry) => entry.isMe)?.rank ?? 1
 
   return (
     <div className="grid gap-[18px] px-5 py-5 sm:px-7 xl:grid-cols-[minmax(0,1fr)_340px]">
       <div className="flex flex-col gap-[18px]">
         <EloHero />
         <StatsRow localRank={currentUserRank} matches={currentUserMatches} />
-        <HealthNudge recoveryScore={mockHealth.recoveryScore} />
+        <HealthNudge recoveryScore={recoveryScore ?? 0} advice={advice} />
         <RecentMatches matches={currentUserMatches.slice(0, 5)} />
       </div>
 
       <div className="flex flex-col gap-[18px]">
-        <NearbyCourts courts={nearbyCourts} isLoading={!isUsingPreciseLocation && locationStatus === 'loading'} />
+        <NearbyCourts
+          courts={nearbyCourts}
+          isLoading={!isUsingPreciseLocation && locationStatus === 'loading'}
+        />
         <LocalLeaderboard entries={leaderboardEntries} />
       </div>
     </div>

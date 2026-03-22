@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
 import { Activity } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const stateMap = {
   green: {
@@ -19,36 +19,26 @@ const stateMap = {
   },
 }
 
-function HealthNudge({ color = 'green' }) {
+function HealthNudge({ color = 'green', advice }) {
   const state = stateMap[color] || stateMap.green
-  const [geminiAdvice, setGeminiAdvice] = useState('')
-
-  useEffect(() => {
-    let intervalId
-    async function fetchAdvice() {
-      try {
-        const res = await fetch('/api/healthkit/pickleball-advice')
-        const data = await res.json()
-        setGeminiAdvice(data.advice || '')
-      } catch (e) {
-        setGeminiAdvice('')
-      }
-    }
-    fetchAdvice()
-    intervalId = setInterval(fetchAdvice, 10000) // Poll every 10 seconds
-    return () => clearInterval(intervalId)
-  }, [])
 
   return (
-    <section className={`relative flex items-center gap-3 overflow-hidden rounded-[10px] border px-4 py-[13px] ${state.box}`}>
-      <div className={`flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-[9px] ${state.iconBox}`}>
-        <Activity className={`h-4 w-4 ${state.iconColor}`} strokeWidth={1.8} />
+    <section className={`relative overflow-hidden rounded-[10px] border px-4 py-[13px] ${state.box}`}>
+      <div className="mb-3 flex items-start justify-between gap-3">
+        <div className={`flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-[9px] ${state.iconBox}`}>
+          <Activity className={`h-4 w-4 ${state.iconColor}`} strokeWidth={1.8} />
+        </div>
+        <Link
+          to="/health"
+          className="rounded-full border border-[color:rgba(200,241,53,0.28)] bg-[color:rgba(200,241,53,0.12)] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.06em] text-[var(--accent)] transition hover:bg-[color:rgba(200,241,53,0.18)]"
+        >
+          View Health
+        </Link>
       </div>
-
-      <div className="min-w-0 flex-1">
+      <div className="min-w-0">
         <div className="text-[13px] font-semibold leading-[1.3] text-[var(--text)]">Health Suggestions</div>
         <div className="mt-[2px] text-[11px] text-[var(--muted)]">
-          {geminiAdvice || 'Loading personalized advice...'}
+          {advice || 'Upload Apple Health data to get personalized advice.'}
         </div>
       </div>
     </section>

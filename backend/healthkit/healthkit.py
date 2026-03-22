@@ -349,6 +349,67 @@ def _summarize_sleep(records: list[ET.Element]) -> MetricSummary:
     )
 
 
+def _build_today_metrics(records: list[ET.Element]) -> dict[str, dict[str, Any]]:
+    """Build simple per-day (today) aggregates based on startDate calendar date.
+
+    Includes records whose startDate falls on the current local calendar day.
+    """
+    today_date = datetime.now().astimezone().date()
+
+    today_steps = 0.0
+    today_active_kcal = 0.0
+    today_sleep_hours = 0.0
+
+    for record in records:
+        r_type = record.attrib.get("type")
+        raw_value = record.attrib.get("value")
+        try:
+            value = float(raw_value) if raw_value is not None else None
+        except ValueError:
+            value = None
+
+        start_date = _parse_iso_datetime(record.attrib.get("startDate"))
+        end_date = _parse_iso_datetime(record.attrib.get("endDate"))
+
+        # Only include records where the startDate is today
+        if not start_date or start_date.date() != today_date:
+            continue
+
+        # Steps and active energy are quantity types with scalar values
+        if r_type == APPLE_HEALTH_TYPES["steps"]["identifier"] and value is not None:
+            today_steps += value
+        elif r_type == APPLE_HEALTH_TYPES["active_energy_burned"]["identifier"] and value is not None:
+            today_active_kcal += value
+        # Sleep is duration-based; use hours from start/end
+        elif r_type == SLEEP_IDENTIFIER and end_date and end_date > start_date:
+            today_sleep_hours += (end_date - start_date).total_seconds() / 3600.0
+
+    today: dict[str, dict[str, Any]] = {}
+
+    if today_steps > 0:
+        today["steps"] = {
+            "label": "Steps (today)",
+            "value": today_steps,
+            "unit": APPLE_HEALTH_TYPES["steps"]["unit"],
+        }
+
+    if today_active_kcal > 0:
+        today["active_energy_burned"] = {
+            "label": "Active Energy (today)",
+            "value": today_active_kcal,
+            "unit": APPLE_HEALTH_TYPES["active_energy_burned"]["unit"],
+        }
+
+    if today_sleep_hours > 0:
+        today["sleep"] = {
+            "label": "Sleep (today)",
+            "value": today_sleep_hours,
+            "unit": METRIC_CONFIG["sleep"]["unit"],
+        }
+
+    return today
+
+
 def parse_healthkit_export(xml_path: str | Path) -> dict[str, Any]:
     """
     Parse an Apple Health export.xml file into API-ready metric summaries.
@@ -402,13 +463,19 @@ def parse_healthkit_export(xml_path: str | Path) -> dict[str, Any]:
     if sleep_summary.status == "missing":
         missing_fields.append("sleep")
 
+    # Build simple "today" aggregates from raw records (current local day only)
+    today_metrics = _build_today_metrics(records)
+
     return {
         "source": "apple_health_export_xml",
         "file_name": xml_file.name,
         "imported_at": datetime.utcnow().isoformat() + "Z",
         "record_count": len(records),
         "missing_fields": missing_fields,
-        "metrics": {key: asdict(value) for key, value in metrics.items()},
+        "metrics": {
+            **{key: asdict(value) for key, value in metrics.items()},
+            "today": today_metrics,
+        },
     }
 
 
@@ -465,30 +532,50 @@ def metrics_to_json(xml_path: str | Path) -> str:
     return json.dumps(parse_healthkit_export(xml_path), indent=2)
 
 
-def get_pickleball_advice_from_healthkit(xml_path: str, api_key: str = None) -> str:
+def get_pickleball_advice_from_healthkit(snapshot_or_path: str | Path | dict[str, Any], api_key: str | None = None) -> str:
+    """Ask Gemini for concise pickleball improvement advice based on HealthKit metrics.
+
+    This helper is flexible:
+    - If given a dict, it is treated as an already-parsed HealthKit snapshot with a
+      "metrics" key (the shape produced by parse_healthkit_export or normalize_mobile_healthkit_payload).
+    - If given a path, it is assumed to be an Apple Health export.xml and will be
+      parsed before generating advice.
     """
-    Loads Apple HealthKit data, summarizes it, and asks Gemini for concise pickleball improvement advice.
-    Args:
-        xml_path (str): Path to Apple Health export.xml
-        api_key (str, optional): Gemini API key
-    Returns:
-        str: Advice from Gemini
-    """
-    summary = parse_healthkit_export(xml_path)
-    metrics_json = json.dumps(summary["metrics"], indent=2)
+
+    # Accept either a pre-parsed snapshot dict or a path to an XML export
+    if isinstance(snapshot_or_path, dict):
+        snapshot = snapshot_or_path
+    else:
+        # Treat as path-like and parse the XML export
+        snapshot = parse_healthkit_export(snapshot_or_path)
+
+    metrics = snapshot.get("metrics", {})
+    metrics_json = json.dumps(metrics, indent=2)
+
     prompt = f"""
 You are a health and sports performance expert. Here is a user's recent Apple Health data:
 {metrics_json}
 
-Based on this data, what are 1 to 3 concise, actionable suggestions (in 1-3 sentences total) to help this user improve their pickleball gameplay? Focus on fitness, recovery, and any relevant health metrics. Be brief and practical."
-    return get_gemini_response(prompt, api_key=api_key)"""
+Based on this data, give:
+1. 1 to 3 concise, actionable suggestions to help this user improve their pickleball gameplay.
+2. 1 short fun fact related to one of the user's visible health metrics, such as sleep, heart rate, HRV, steps, or recovery.
+
+Requirements:
+- Keep the full response brief and practical.
+- Use plain, friendly language.
+- Make the fun fact genuinely related to a metric present in the data.
+- Do not mention metrics that are missing.
+- Return a short paragraph in 2 to 4 sentences total.
+"""
+
+    return get_gemini_response(prompt, api_key=api_key)
 
 
 if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(
-        description="Parse an Apple Health export.xml file into JSON summaries."
+        description="Parse an Apple Health export.xml file into JSON summaries.",
     )
     parser.add_argument("xml_path", help="Path to Apple Health export.xml")
     args = parser.parse_args()

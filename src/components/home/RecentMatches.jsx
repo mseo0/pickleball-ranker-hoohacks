@@ -1,6 +1,18 @@
+import { useAuth } from '../../auth/AuthContext'
 import SectionHeader from '../layout/SectionHeader'
 
 function RecentMatches({ matches }) {
+  const { currentUser } = useAuth()
+  const currentUsername = currentUser?.username ?? ''
+
+  const getDisplayPlayers = (players) => {
+    if (!currentUsername) {
+      return players
+    }
+
+    return players.replaceAll(currentUsername, 'You')
+  }
+
   return (
     <section className="rounded-[12px] border border-[var(--border)] bg-[var(--card)] px-5 py-[18px]">
       <div className="mb-[10px]">
@@ -29,7 +41,9 @@ function RecentMatches({ matches }) {
             </div>
 
             <div className="min-w-0 flex-1">
-              <div className="truncate text-[13px] font-medium text-[var(--text)]">{match.players}</div>
+              <div className="truncate text-[13px] font-medium text-[var(--text)]">
+                {getDisplayPlayers(match.players)}
+              </div>
               <div className="mt-[1px] text-[10px] text-[var(--muted)]">{match.meta}</div>
             </div>
 

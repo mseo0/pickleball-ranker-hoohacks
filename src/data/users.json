@@ -15,16 +15,46 @@
         "wins": 38
       },
       "recentMatches": [
-        { "result": "L", "players": "vs. J. Keller & P. Moss", "meta": "Pen Park · 1h ago", "score": "8–11", "elo": -100 },
-        { "result": "L", "players": "vs. T. Novak & E. Hart", "meta": "Key Rec · Yesterday", "score": "7–11", "elo": -100 },
-        { "result": "W", "players": "vs. D. Price & L. Cole", "meta": "Darden Towe · 2 days ago", "score": "11–9", "elo": 100 },
-        { "result": "L", "players": "vs. R. Shah & M. Young", "meta": "PVCC · 4 days ago", "score": "9–11", "elo": -100 },
-        { "result": "W", "players": "vs. A. Reid & S. Grant", "meta": "Pen Park · 1 week ago", "score": "11–6", "elo": 100 }
+        {
+          "result": "L",
+          "players": "Naython & Ben vs. Timothy & Leo",
+          "meta": "Pen Park · 1h ago",
+          "score": "8–11",
+          "elo": -100
+        },
+        {
+          "result": "L",
+          "players": "Naython & Leo vs. Timothy & Ben",
+          "meta": "Key Rec · Yesterday",
+          "score": "7–11",
+          "elo": -100
+        },
+        {
+          "result": "W",
+          "players": "Naython & Matthew vs. Leo & Ben",
+          "meta": "Darden Towe · 2 days ago",
+          "score": "11–9",
+          "elo": 100
+        },
+        {
+          "result": "L",
+          "players": "Naython & Matthew vs. Timothy & Zane",
+          "meta": "PVCC · 4 days ago",
+          "score": "9–11",
+          "elo": -100
+        },
+        {
+          "result": "W",
+          "players": "Naython & Zane vs. Leo & Ben",
+          "meta": "Pen Park · 1 week ago",
+          "score": "11–6",
+          "elo": 100
+        }
       ]
     },
     {
       "id": "f2fa62d9-5624-4725-8664-396aabb823e6",
-      "username": "MSEO",
+      "username": "Matthew",
       "email": "1240@gmail.com",
       "passwordHash": "e969fc799bd9278a8eff6e34df068214d279e81edb09cce0c42008a7da83fe5a",
       "avatar": "MS",
@@ -37,11 +67,41 @@
         "wins": 57
       },
       "recentMatches": [
-        { "result": "W", "players": "vs. K. Li & N. Brown", "meta": "Greencroft · 2h ago", "score": "11–5", "elo": 100 },
-        { "result": "W", "players": "vs. E. Stone & H. Park", "meta": "Boar's Head · Yesterday", "score": "11–7", "elo": 100 },
-        { "result": "W", "players": "vs. C. Diaz & M. Fox", "meta": "ACAC · 3 days ago", "score": "11–9", "elo": 100 },
-        { "result": "L", "players": "vs. Timothy & Zane", "meta": "Pen Park · 4 days ago", "score": "8–11", "elo": -100 },
-        { "result": "L", "players": "vs. J. Hall & B. Reed", "meta": "Darden Towe · 6 days ago", "score": "10–12", "elo": -100 }
+        {
+          "result": "W",
+          "players": "Matthew & Leo vs. Naython & Ben",
+          "meta": "Greencroft · 2h ago",
+          "score": "11–5",
+          "elo": 100
+        },
+        {
+          "result": "W",
+          "players": "Matthew & Zane vs. Naython & Leo",
+          "meta": "Boar's Head · Yesterday",
+          "score": "11–7",
+          "elo": 100
+        },
+        {
+          "result": "W",
+          "players": "Matthew & Timothy vs. Ben & Leo",
+          "meta": "ACAC · 3 days ago",
+          "score": "11–9",
+          "elo": 100
+        },
+        {
+          "result": "L",
+          "players": "Matthew & Ben vs. Timothy & Leo",
+          "meta": "Pen Park · 4 days ago",
+          "score": "8–11",
+          "elo": -100
+        },
+        {
+          "result": "L",
+          "players": "Matthew & Naython vs. Timothy & Zane",
+          "meta": "Darden Towe · 6 days ago",
+          "score": "10–12",
+          "elo": -100
+        }
       ]
     },
     {
@@ -59,11 +119,41 @@
         "wins": 84
       },
       "recentMatches": [
-        { "result": "W", "players": "vs. MSEO & Zane", "meta": "Pen Park · 45m ago", "score": "11–6", "elo": 100 },
-        { "result": "W", "players": "vs. Naython & J. Patel", "meta": "Darden Towe · 3h ago", "score": "11–8", "elo": 100 },
-        { "result": "W", "players": "vs. R. Chen & D. Okafor", "meta": "Brooks YMCA · Yesterday", "score": "11–7", "elo": 100 },
-        { "result": "W", "players": "vs. M. Torres & K. Patel", "meta": "Darden Towe · 2 days ago", "score": "11–7", "elo": 100 },
-        { "result": "L", "players": "vs. S. Williams & J. Nakamura", "meta": "McIntire · 4 days ago", "score": "8–11", "elo": -100 }
+        {
+          "result": "W",
+          "players": "Timothy & Leo vs. Ben & Naython",
+          "meta": "Pen Park · 45m ago",
+          "score": "11–6",
+          "elo": 100
+        },
+        {
+          "result": "W",
+          "players": "Timothy & Matthew vs. Naython & Ben",
+          "meta": "Darden Towe · 3h ago",
+          "score": "11–8",
+          "elo": 100
+        },
+        {
+          "result": "W",
+          "players": "Timothy & Zane vs. Leo & Matthew",
+          "meta": "Brooks YMCA · Yesterday",
+          "score": "11–7",
+          "elo": 100
+        },
+        {
+          "result": "W",
+          "players": "Timothy & Leo vs. Matthew & Ben",
+          "meta": "Darden Towe · 2 days ago",
+          "score": "11–7",
+          "elo": 100
+        },
+        {
+          "result": "L",
+          "players": "Timothy & Zane vs. Matthew & Ben",
+          "meta": "McIntire · 4 days ago",
+          "score": "8–11",
+          "elo": -100
+        }
       ]
     },
     {
@@ -81,11 +171,145 @@
         "wins": 41
       },
       "recentMatches": [
-        { "result": "W", "players": "vs. C. Bell & T. Wise", "meta": "Key West Club · 2h ago", "score": "11–9", "elo": 100 },
-        { "result": "L", "players": "vs. Timothy & MSEO", "meta": "Pen Park · Yesterday", "score": "6–11", "elo": -100 },
-        { "result": "W", "players": "vs. H. Lowe & B. Kim", "meta": "Forest Lakes · 2 days ago", "score": "11–4", "elo": 100 },
-        { "result": "W", "players": "vs. P. Shah & E. Long", "meta": "ACAC · 5 days ago", "score": "11–8", "elo": 100 },
-        { "result": "L", "players": "vs. R. Moss & K. Dean", "meta": "Boar's Head · 1 week ago", "score": "9–11", "elo": -100 }
+        {
+          "result": "W",
+          "players": "Zane & Leo vs. Naython & Ben",
+          "meta": "Key West Club · 2h ago",
+          "score": "11–9",
+          "elo": 100
+        },
+        {
+          "result": "L",
+          "players": "Zane & Ben vs. Timothy & Leo",
+          "meta": "Pen Park · Yesterday",
+          "score": "6–11",
+          "elo": -100
+        },
+        {
+          "result": "W",
+          "players": "Zane & Timothy vs. Naython & Ben",
+          "meta": "Forest Lakes · 2 days ago",
+          "score": "11–4",
+          "elo": 100
+        },
+        {
+          "result": "W",
+          "players": "Zane & Leo vs. Naython & Ben",
+          "meta": "ACAC · 5 days ago",
+          "score": "11–8",
+          "elo": 100
+        },
+        {
+          "result": "L",
+          "players": "Zane & Ben vs. Timothy & Leo",
+          "meta": "Boar's Head · 1 week ago",
+          "score": "9–11",
+          "elo": -100
+        }
+      ]
+    },
+    {
+      "id": "88519c58-80bc-4a7c-9361-d525ee4936b9",
+      "username": "Leo",
+      "email": "nathan@email.com",
+      "passwordHash": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+      "avatar": "LE",
+      "createdAt": "2026-03-22T09:05:13.024Z",
+      "profile": {
+        "eloRating": 4890,
+        "duprRating": 1.2,
+        "city": "Charlottesville",
+        "matchesPlayed": 86,
+        "wins": 53
+      },
+      "recentMatches": [
+        {
+          "result": "W",
+          "players": "Leo & Timothy vs. Ben & Naython",
+          "meta": "Pen Park · 30m ago",
+          "score": "11–7",
+          "elo": 100
+        },
+        {
+          "result": "W",
+          "players": "Leo & Zane vs. Ben & Matthew",
+          "meta": "Darden Towe · 5h ago",
+          "score": "11–9",
+          "elo": 100
+        },
+        {
+          "result": "L",
+          "players": "Leo & Ben vs. Timothy & Matthew",
+          "meta": "Brooks YMCA · Yesterday",
+          "score": "9–11",
+          "elo": -100
+        },
+        {
+          "result": "W",
+          "players": "Leo & Timothy vs. Naython & Ben",
+          "meta": "Key Rec · 3 days ago",
+          "score": "11–6",
+          "elo": 100
+        },
+        {
+          "result": "L",
+          "players": "Leo & Ben vs. Timothy & Zane",
+          "meta": "ACAC · 6 days ago",
+          "score": "8–11",
+          "elo": -100
+        }
+      ]
+    },
+    {
+      "id": "449e4a0e-40d4-4d9f-acbe-d18b00edc377",
+      "username": "Ben",
+      "email": "ben@email.com",
+      "passwordHash": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+      "avatar": "BE",
+      "createdAt": "2026-03-22T09:05:36.024Z",
+      "profile": {
+        "eloRating": 4210,
+        "duprRating": 1.2,
+        "city": "Charlottesville",
+        "matchesPlayed": 58,
+        "wins": 29
+      },
+      "recentMatches": [
+        {
+          "result": "L",
+          "players": "Ben & Naython vs. Leo & Timothy",
+          "meta": "Pen Park · 30m ago",
+          "score": "7–11",
+          "elo": -100
+        },
+        {
+          "result": "L",
+          "players": "Ben & Matthew vs. Zane & Leo",
+          "meta": "Darden Towe · 5h ago",
+          "score": "9–11",
+          "elo": -100
+        },
+        {
+          "result": "W",
+          "players": "Ben & Zane vs. Naython & Timothy",
+          "meta": "Forest Lakes · Yesterday",
+          "score": "11–8",
+          "elo": 100
+        },
+        {
+          "result": "L",
+          "players": "Ben & Naython vs. Leo & Timothy",
+          "meta": "Key Rec · 3 days ago",
+          "score": "6–11",
+          "elo": -100
+        },
+        {
+          "result": "W",
+          "players": "Ben & Matthew vs. Naython & Zane",
+          "meta": "PVCC · 1 week ago",
+          "score": "11–9",
+          "elo": 100
+        }
       ]
     }
   ]

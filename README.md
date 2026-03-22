@@ -1,9 +1,24 @@
 # Pickelo
+
 # Made by
 Timothy Park  
 Matthew Seo  
 Minh Quan Le  
 Zane Geadah  
+
+## Screenshots
+
+### Home Dashboard
+![Home Dashboard](./readmeimage/1.png)
+
+### Court Insights
+![Court Insights](./readmeimage/2.png)
+
+### Health Insights
+![Health Insights](./readmeimage/3.png)
+
+### Community Insights
+![Community Insights](./readmeimage/4.png)
 
 # Inspiration
 Pickleball is one of the fastest-growing sports in the country, and for good reason. It's accessible, social, and genuinely fun. But as we kept playing, we noticed something missing: there was no lightweight, casual way to track how good you actually were relative to your friends and local community. Existing rating systems are built around formal tournaments, leaving recreational players with no real sense of progression or competitive stakes.

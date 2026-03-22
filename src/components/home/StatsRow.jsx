@@ -19,10 +19,11 @@ function getCurrentStreak(matches) {
   }
 }
 
-function StatsRow({ localRank = 1, matches = [] }) {
+function StatsRow({ localRank = 1, matches = [], matchesPlayed = 0, wins = 0 }) {
   const streak = getCurrentStreak(matches)
+  const winRate = matchesPlayed > 0 ? Math.round((wins / matchesPlayed) * 100) : 0
   const stats = [
-    { label: 'Matches', value: '142', sub: '68% win rate' },
+    { label: 'Matches', value: `${matchesPlayed}`, sub: `${winRate}% win rate` },
     { label: 'Streak', value: streak.value, sub: streak.sub },
     { label: 'Local Rank', value: `#${localRank}`, sub: 'Charlottesville' },
   ]

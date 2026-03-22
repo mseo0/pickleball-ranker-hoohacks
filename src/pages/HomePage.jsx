@@ -118,6 +118,7 @@ function HomePage() {
         })),
     [currentUser?.id, users],
   )
+  const currentUserProfile = users.find((user) => user.id === currentUser?.id)?.profile
   const currentUserMatches = users.find((user) => user.id === currentUser?.id)?.recentMatches ?? []
 
   const currentUserRank = leaderboardEntries.find((entry) => entry.isMe)?.rank ?? 1
@@ -138,7 +139,12 @@ function HomePage() {
             }}
           />
         ) : null}
-        <StatsRow localRank={currentUserRank} matches={currentUserMatches} />
+        <StatsRow
+          localRank={currentUserRank}
+          matches={currentUserMatches}
+          matchesPlayed={currentUserProfile?.matchesPlayed ?? 0}
+          wins={currentUserProfile?.wins ?? 0}
+        />
         <HealthNudge recoveryScore={recoveryScore ?? 0} advice={advice} />
         <RecentMatches matches={currentUserMatches.slice(0, 5)} />
       </div>

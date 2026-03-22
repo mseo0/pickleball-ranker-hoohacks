@@ -1,5 +1,14 @@
 import SectionHeader from '../layout/SectionHeader'
 
+function formatCourtAddress(address) {
+  const parts = address.split(',').map((part) => part.trim())
+  if (parts.length < 3) {
+    return address
+  }
+
+  return parts.slice(0, 3).join(', ')
+}
+
 function NearbyCourts({ courts, isLoading = false }) {
   return (
     <section className="rounded-[12px] border border-[var(--border)] bg-[var(--card)] px-5 py-[18px]">
@@ -37,9 +46,9 @@ function NearbyCourts({ courts, isLoading = false }) {
               target="_blank"
               rel="noreferrer"
               className="group mt-2 block truncate text-[11px] text-[var(--muted)] underline decoration-[var(--accent)] decoration-2 underline-offset-4 transition-colors hover:text-[var(--text)]"
-              title={court.address}
+              title={formatCourtAddress(court.address)}
             >
-              <span>{court.address}</span>
+              <span>{formatCourtAddress(court.address)}</span>
               <span className="ml-2 text-[10px] uppercase tracking-[0.08em] text-[var(--accent)]/75 transition-colors group-hover:text-[var(--accent)]">
                 Maps
               </span>

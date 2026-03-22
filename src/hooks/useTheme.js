@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react'
 
-const THEME_KEY = 'pr-theme'
-
 const getInitialTheme = () => {
   if (typeof window === 'undefined') {
     return 'dark'
   }
 
-  const storedTheme = window.localStorage.getItem(THEME_KEY)
-  return storedTheme === 'light' ? 'light' : 'dark'
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
 export function useTheme() {
@@ -16,8 +13,18 @@ export function useTheme() {
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
-    window.localStorage.setItem(THEME_KEY, theme)
   }, [theme])
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+
+    const syncTheme = (event) => {
+      setTheme(event.matches ? 'dark' : 'light')
+    }
+
+    mediaQuery.addEventListener('change', syncTheme)
+    return () => mediaQuery.removeEventListener('change', syncTheme)
+  }, [])
 
   return { theme, setTheme }
 }

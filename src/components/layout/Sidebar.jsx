@@ -1,4 +1,4 @@
-import { Grid2x2, Heart, Users } from 'lucide-react'
+import { Grid2x2, Heart, MapPinned, Users } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 import { useAuth } from '../../auth/AuthContext'
 
@@ -7,6 +7,7 @@ const navGroups = [
     label: 'Main',
     items: [
       { to: '/', label: 'Home', icon: Grid2x2, end: true },
+      { to: '/courts', label: 'Courts', icon: MapPinned },
       { to: '/health', label: 'Health', icon: Heart },
       { to: '/community', label: 'Community', icon: Users },
     ],
@@ -27,8 +28,8 @@ function Sidebar({ currentUser }) {
   const { logout } = useAuth()
 
   return (
-    <aside className="hidden h-screen w-[220px] shrink-0 flex-col border-r border-[rgba(200,241,53,0.10)] bg-[#0d150d] lg:flex">
-      <div className="border-b border-[rgba(200,241,53,0.10)] px-5 py-5">
+    <aside className="hidden h-screen w-[220px] shrink-0 flex-col border-r border-[var(--border-sub)] bg-[var(--sidebar-bg)] lg:flex">
+      <div className="border-b border-[var(--border-sub)] px-5 py-5">
         <div className="flex items-center gap-2.5">
           <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[8px] bg-[var(--accent)] text-[var(--accent-dark)]">
             <PickleballMark />
@@ -54,8 +55,8 @@ function Sidebar({ currentUser }) {
                   [
                     'flex items-center gap-[9px] rounded-[8px] px-3 py-[8px] text-[13px] transition-colors',
                     isActive
-                      ? 'bg-[rgba(200,241,53,0.14)] font-medium text-[var(--accent)]'
-                      : 'text-[var(--muted)] hover:bg-[rgba(200,241,53,0.06)]',
+                      ? 'bg-[color:color-mix(in_srgb,var(--accent)_14%,transparent)] font-medium text-[var(--accent)]'
+                      : 'text-[var(--muted)] hover:bg-[color:color-mix(in_srgb,var(--accent)_7%,transparent)]',
                   ].join(' ')
                 }
               >
@@ -74,22 +75,17 @@ function Sidebar({ currentUser }) {
         ))}
       </nav>
 
-      <div className="mt-auto border-t border-[rgba(200,241,53,0.10)] p-3">
+      <div className="mt-auto border-t border-[var(--border-sub)] p-3">
         <div className="flex items-center gap-2.5 rounded-[8px] px-2 py-2">
-          <div className="flex h-[28px] w-[28px] shrink-0 items-center justify-center rounded-full border-[1.5px] border-[var(--accent)] bg-[rgba(200,241,53,0.12)] text-[10px] font-bold text-[var(--accent)]">
+          <div className="flex h-[28px] w-[28px] shrink-0 items-center justify-center rounded-full border-[1.5px] border-[var(--accent)] bg-[color:color-mix(in_srgb,var(--accent)_12%,transparent)] text-[10px] font-bold text-[var(--accent)]">
             {currentUser?.avatar || 'PR'}
           </div>
           <div className="min-w-0">
             <div className="truncate text-[12px] font-medium text-[var(--text)]">
               {currentUser?.username || 'Picklerank User'}
             </div>
-<<<<<<< Updated upstream
             <div className="truncate text-[11px] text-[var(--muted)]">
-              {currentUser?.profile?.eloRating ?? 1200} rating · {currentUser?.profile?.city || 'Unknown'}
-=======
-            <div className="truncate text-[10px] text-[var(--muted)]">
-              {currentUser?.profile?.rank || 'Bronze I'} · {currentUser?.profile?.city || 'Unknown'}
->>>>>>> Stashed changes
+              {currentUser?.profile?.eloRating ?? 1200} elo · {currentUser?.profile?.city || 'Unknown'}
             </div>
           </div>
         </div>
@@ -98,7 +94,6 @@ function Sidebar({ currentUser }) {
           type="button"
           onClick={logout}
           className="mt-3 flex w-full items-center justify-center gap-2 rounded-[8px] border border-[rgba(200,241,53,0.12)] px-[8px] py-[8px] text-[12px] text-[var(--muted)] transition-colors hover:border-[rgba(248,113,113,0.3)] hover:text-[#f87171]"
-          style={{ display: 'none' }}
         >
           <svg
             viewBox="0 0 24 24"

@@ -35,7 +35,7 @@ function MainApp() {
     <div className="app-shell bg-[var(--bg)] text-[var(--text)]">
       <Sidebar currentUser={currentUser} />
       <main className="min-w-0 flex-1 overflow-y-auto">
-        <TopBar currentUser={currentUser} pageTitle={pageTitle} theme={theme} setTheme={setTheme} />
+        <TopBar currentUser={currentUser} pageTitle={pageTitle} />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/courts" element={<CourtsMapPage />} />

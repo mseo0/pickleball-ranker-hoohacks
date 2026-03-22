@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+sse-starlette
+beautifulsoup4
+google-generativeai
+requests
+fastmcp
+flask
+
+#pip install -r requirements.txt

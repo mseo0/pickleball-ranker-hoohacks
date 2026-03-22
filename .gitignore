@@ -28,3 +28,7 @@ dist-ssr
 __pycache__/
 *.pyc
 .env
+.venv
+backend/uploads/export.xml
+backend/uploads/export.xml
+/backend/uploads

@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any
 import json
 import xml.etree.ElementTree as ET
+from ..mcp.functions import get_gemini_response
 
 
 class HealthKitParseError(Exception):
@@ -462,6 +463,25 @@ def load_healthkit_snapshot(source: str | Path = DEFAULT_STORAGE_PATH) -> dict[s
 def metrics_to_json(xml_path: str | Path) -> str:
     """Helper to produce serialized JSON for an API response."""
     return json.dumps(parse_healthkit_export(xml_path), indent=2)
+
+
+def get_pickleball_advice_from_healthkit(xml_path: str, api_key: str = None) -> str:
+    """
+    Loads Apple HealthKit data, summarizes it, and asks Gemini for concise pickleball improvement advice.
+    Args:
+        xml_path (str): Path to Apple Health export.xml
+        api_key (str, optional): Gemini API key
+    Returns:
+        str: Advice from Gemini
+    """
+    summary = parse_healthkit_export(xml_path)
+    metrics_json = json.dumps(summary["metrics"], indent=2)
+    prompt = f"""
+You are a health and sports performance expert. Here is a user's recent Apple Health data:
+{metrics_json}
+
+Based on this data, what are 1 to 3 concise, actionable suggestions (in 1-3 sentences total) to help this user improve their pickleball gameplay? Focus on fitness, recovery, and any relevant health metrics. Be brief and practical."
+    return get_gemini_response(prompt, api_key=api_key)"""
 
 
 if __name__ == "__main__":

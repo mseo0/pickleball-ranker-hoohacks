@@ -3,10 +3,12 @@ from __future__ import annotations
 from pathlib import Path
 import tempfile
 import json
+import sys
+import os
 
 from flask import Flask, jsonify, request
 
-from healthkit.healthkit import (
+from backend.healthkit.healthkit import (
     HealthKitParseError,
     load_healthkit_snapshot,
     normalize_mobile_healthkit_payload,
@@ -15,6 +17,9 @@ from healthkit.healthkit import (
     get_pickleball_advice_from_healthkit,  # import the new function
 )
 
+
+# Ensure 'mcp' and 'healthkit' modules are importable
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 
 app = Flask(__name__)
 

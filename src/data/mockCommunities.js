@@ -1,0 +1,46 @@
+export const mockCommunities = [
+  {
+    id: 'cville',
+    name: 'CVille Pickleballers',
+    desc: 'Competitive + social play, all levels.',
+    gradient: 'linear-gradient(135deg,#1a3a1a,#0d2a0d)',
+    badges: ['open', 'rated'],
+    members: 247,
+    memberStack: [
+      { initials: 'TK', bg: 'rgba(200,241,53,0.15)', color: '#C8F135' },
+      { initials: 'SR', bg: 'rgba(136,180,255,0.2)', color: '#88b4ff' },
+      { initials: 'MB', bg: 'rgba(248,191,36,0.2)', color: '#fbbf24' },
+    ],
+    joined: true,
+    joinType: 'joined',
+  },
+  {
+    id: 'sunday',
+    name: 'Sunday Dinkers',
+    desc: 'Relaxed Sunday sessions, all ages.',
+    gradient: 'linear-gradient(135deg,#2a1a2a,#1a0d1a)',
+    badges: ['casual', 'open'],
+    members: 156,
+    memberStack: [
+      { initials: 'JM', bg: 'rgba(167,139,250,0.2)', color: '#a78bfa' },
+      { initials: 'CL', bg: 'rgba(74,222,128,0.2)', color: '#4ade80' },
+    ],
+    joined: true,
+    joinType: 'joined',
+  },
+  {
+    id: 'blueridge',
+    name: 'Blue Ridge Competitors',
+    desc: 'Serious rated play. 1600+ ELO required.',
+    gradient: 'linear-gradient(135deg,#1a1a3a,#0d0d2a)',
+    badges: ['comp', 'rated'],
+    members: 84,
+    memberStack: [
+      { initials: 'AK', bg: 'rgba(248,113,113,0.2)', color: '#f87171' },
+      { initials: 'PL', bg: 'rgba(200,241,53,0.2)', color: '#C8F135' },
+    ],
+    joined: false,
+    requirementLabel: '1600+ ELO',
+    joinType: 'request',
+  },
+]

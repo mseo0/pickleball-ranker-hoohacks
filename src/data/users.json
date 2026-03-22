@@ -1,0 +1,36 @@
+{
+  "users": [
+    {
+      "id": "11a477c4-ebfe-4c71-88a3-dd0428937c5a",
+      "username": "Naython",
+      "email": "123@gmail.com",
+      "passwordHash": "d48948a2de75179ff1b0f17d0368f209324d62c2b06d93edec3fc14d731404a7",
+      "avatar": "NA",
+      "createdAt": "2026-03-22T07:51:54.620Z",
+      "profile": {
+        "eloRating": 1200,
+        "rank": "Bronze I",
+        "duprRating": null,
+        "city": "Charletsovile",
+        "matchesPlayed": 0,
+        "wins": 0
+      }
+    },
+    {
+      "id": "f2fa62d9-5624-4725-8664-396aabb823e6",
+      "username": "MSEO",
+      "email": "1240@gmail.com",
+      "passwordHash": "e969fc799bd9278a8eff6e34df068214d279e81edb09cce0c42008a7da83fe5a",
+      "avatar": "MS",
+      "createdAt": "2026-03-22T08:02:33.888Z",
+      "profile": {
+        "eloRating": 1200,
+        "rank": "Bronze I",
+        "duprRating": null,
+        "city": "Charlettsville",
+        "matchesPlayed": 0,
+        "wins": 0
+      }
+    }
+  ]
+}

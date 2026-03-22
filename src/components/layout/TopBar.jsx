@@ -80,16 +80,22 @@ function ThemeToggle({ isDark, onToggle }) {
   )
 }
 
-function TopBar({ pageTitle, theme, setTheme }) {
+function TopBar({ currentUser, pageTitle, theme, setTheme }) {
   const isDark = theme === 'dark'
+  const title = pageTitle === 'Dashboard' ? `WELCOME BACK, ${currentUser.username.toUpperCase()}` : pageTitle
 
   return (
     <header className="sticky top-0 z-10 flex items-center justify-between border-b border-[var(--border-sub)] bg-[var(--bg)] px-5 pb-[14px] pt-[18px] sm:px-7">
       <h1 className="font-display text-[22px] tracking-[0.06em] text-[var(--text)]">
-        {pageTitle}
+        {title}
       </h1>
 
-      <ThemeToggle isDark={isDark} onToggle={setTheme} />
+      <div className="flex items-center gap-[10px]">
+        <ThemeToggle isDark={isDark} onToggle={setTheme} />
+        <div className="flex h-[34px] w-[34px] items-center justify-center rounded-full border-[1.5px] border-[var(--accent)] bg-[color:color-mix(in_srgb,var(--accent)_16%,transparent)] text-[12px] font-semibold text-[var(--accent)]">
+          {currentUser.avatar}
+        </div>
+      </div>
     </header>
   )
 }

@@ -1,5 +1,6 @@
 import { Grid2x2, Heart, Users } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
+import { useAuth } from '../../auth/AuthContext'
 
 const navGroups = [
   {
@@ -22,7 +23,9 @@ function PickleballMark() {
   )
 }
 
-function Sidebar() {
+function Sidebar({ currentUser }) {
+  const { logout } = useAuth()
+
   return (
     <aside className="hidden h-screen w-[220px] shrink-0 flex-col border-r border-[var(--border)] bg-[var(--sidebar)] lg:flex">
       <div className="border-b border-[var(--border)] px-5 pb-6 pt-5">
@@ -74,13 +77,38 @@ function Sidebar() {
       <div className="mt-auto border-t border-[var(--border)] p-3">
         <div className="flex items-center gap-2.5 rounded-[8px] px-2 py-2">
           <div className="flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-full border-[1.5px] border-[var(--accent)] bg-[color:color-mix(in_srgb,var(--accent)_16%,transparent)] text-[11px] font-semibold text-[var(--accent)]">
-            AJ
+            {currentUser?.avatar || 'PR'}
           </div>
           <div className="min-w-0">
-            <div className="truncate text-[13px] font-medium text-[var(--text)]">Alex Johnson</div>
-            <div className="truncate text-[11px] text-[var(--muted)]">Gold III · #84 Local</div>
+            <div className="truncate text-[13px] font-medium text-[var(--text)]">
+              {currentUser?.username || 'Picklerank User'}
+            </div>
+            <div className="truncate text-[11px] text-[var(--muted)]">
+              {currentUser?.profile?.rank || 'Bronze I'} · {currentUser?.profile?.city || 'Unknown'}
+            </div>
           </div>
         </div>
+
+        <button
+          type="button"
+          onClick={logout}
+          className="mt-3 flex w-full items-center justify-center gap-2 rounded-[8px] border border-[rgba(200,241,53,0.12)] px-[8px] py-[8px] text-[12px] text-[var(--muted)] transition-colors hover:border-[rgba(248,113,113,0.3)] hover:text-[#f87171]"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            className="h-[14px] w-[14px]"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <path d="M16 17l5-5-5-5" />
+            <path d="M21 12H9" />
+          </svg>
+          <span>Sign Out</span>
+        </button>
       </div>
     </aside>
   )

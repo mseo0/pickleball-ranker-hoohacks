@@ -452,9 +452,8 @@ export default function HealthPage() {
             ? {
                 calories: today.active_energy_burned
                   ? {
-                      // backend is kcal → convert to calories
-                      value: Math.round((today.active_energy_burned.value ?? 0) * 1000),
-                      unit: 'cal',
+                      value: Math.round(today.active_energy_burned.value ?? 0),
+                      unit: today.active_energy_burned.unit || 'kcal',
                       pct: 75,
                     }
                   : {
@@ -481,7 +480,7 @@ export default function HealthPage() {
                 },
               }
             : {
-                calories: { value: 0, unit: 'cal', pct: 0 },
+                calories: { value: 0, unit: 'kcal', pct: 0 },
                 steps: { value: 0, unit: 'steps', pct: 0 },
                 active: { value: '0', unit: 'min', pct: 0 },
               },

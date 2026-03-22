@@ -27,6 +27,7 @@ FRONTEND_PID=$!
 # Wait for all background processes
 wait $BACKEND_PID $UPLOAD_PID $MCP_PID $FRONTEND_PID
 
-
+# lsof -ti tcp:5000 | xargs kill -9
+# lsof -ti tcp:5050 | xargs kill -9
 # chmod +x start.sh 
 # ./start.sh

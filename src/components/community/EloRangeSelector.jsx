@@ -1,8 +1,36 @@
 function EloPill({ label, value }) {
   return (
-    <div className="flex-1 rounded-[8px] border border-[rgba(200,241,53,0.18)] bg-[var(--card2)] px-[12px] py-[7px]">
-      <div className="text-[9px] uppercase tracking-[0.08em] text-[var(--muted)]">{label}</div>
-      <div className="font-display text-[18px] leading-none text-[var(--accent)]">{value}</div>
+    <div
+      style={{
+        background: '#1a2a1a',
+        border: '1px solid rgba(200,241,53,0.20)',
+        borderRadius: '8px',
+        padding: '8px 14px',
+        flex: 1,
+      }}
+    >
+      <span
+        style={{
+          fontSize: '8px',
+          color: '#7a9a7a',
+          textTransform: 'uppercase',
+          letterSpacing: '0.08em',
+          display: 'block',
+        }}
+      >
+        {label}
+      </span>
+      <span
+        style={{
+          fontFamily: "'Bebas Neue', sans-serif",
+          fontSize: '22px',
+          color: '#C8F135',
+          lineHeight: 1.1,
+          display: 'block',
+        }}
+      >
+        {value}
+      </span>
     </div>
   )
 }
@@ -20,11 +48,11 @@ function EloRangeSelector({
     <div className="flex flex-col gap-[8px]">
       <div className="flex items-center gap-[10px]">
         <EloPill label="Min ELO" value={eloMin} />
-        <div className="shrink-0 text-[14px] text-[var(--dim)]">↔</div>
+        <div className="shrink-0 text-[16px] text-[var(--dim)]">↔</div>
         <EloPill label="Max ELO" value={eloMax} />
         <div className="shrink-0 text-right">
           <div className="text-[10px] text-[var(--muted)]">±{rangeDelta} default</div>
-          <button type="button" onClick={onToggleAdjust} className="text-[10px] text-[var(--accent)]">
+          <button type="button" onClick={onToggleAdjust} className="block text-[10px] text-[var(--accent)]">
             Adjust
           </button>
         </div>

@@ -84,17 +84,83 @@ function TopBar({ currentUser, pageTitle, theme, setTheme }) {
   const isDark = theme === 'dark'
   const title = pageTitle === 'Dashboard' ? `WELCOME BACK, ${currentUser.username.toUpperCase()}` : pageTitle
 
+  const searchPlaceholder = pageTitle === 'Community' ? 'Search communities…' : 'Search...'
+
   return (
-    <header className="sticky top-0 z-10 flex items-center justify-between border-b border-[var(--border-sub)] bg-[var(--bg)] px-5 pb-[14px] pt-[18px] sm:px-7">
-      <h1 className="font-display text-[22px] tracking-[0.06em] text-[var(--text)]">
+    <header
+      className="sticky top-0 z-10 flex items-center justify-between px-[28px] py-[16px]"
+      style={{ background: '#0c140c', borderBottom: '1px solid rgba(200,241,53,0.08)' }}
+    >
+      <h1
+        style={{
+          fontFamily: "'Bebas Neue', sans-serif",
+          fontSize: '22px',
+          fontWeight: 400,
+          color: '#e8f0e8',
+          letterSpacing: '0.06em',
+        }}
+      >
         {title}
       </h1>
 
       <div className="flex items-center gap-[10px]">
+        <label className="flex h-[36px] w-[200px] items-center gap-[8px] rounded-[8px] border border-[rgba(200,241,53,0.18)] bg-[var(--card)] px-[12px]">
+          <svg
+            width="13"
+            height="13"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#7a9a7a"
+            strokeWidth="1.9"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.35-4.35" />
+          </svg>
+          <input
+            type="text"
+            placeholder={searchPlaceholder}
+            className="w-full bg-transparent text-[12px] text-[var(--text)] outline-none placeholder:text-[var(--dim)]"
+          />
+        </label>
+
+        {pageTitle === 'Community' ? (
+          <button
+            type="button"
+            style={{
+              background: '#C8F135',
+              color: '#0c140c',
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: '12px',
+              fontWeight: 600,
+              borderRadius: '8px',
+              padding: '7px 14px',
+              border: 'none',
+              boxShadow: 'none',
+              height: '36px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+            }}
+          >
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+            <span>Create Community</span>
+          </button>
+        ) : null}
+
         <ThemeToggle isDark={isDark} onToggle={setTheme} />
-        <div className="flex h-[34px] w-[34px] items-center justify-center rounded-full border-[1.5px] border-[var(--accent)] bg-[color:color-mix(in_srgb,var(--accent)_16%,transparent)] text-[12px] font-semibold text-[var(--accent)]">
-          {currentUser.avatar}
-        </div>
       </div>
     </header>
   )

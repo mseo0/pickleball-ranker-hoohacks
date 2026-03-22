@@ -1,12 +1,12 @@
 function SearchPlusIcon() {
   return (
     <svg
-      width="16"
-      height="16"
+      width="17"
+      height="17"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="#0f1a0f"
-      strokeWidth="1.9"
+      stroke="#0c140c"
+      strokeWidth="2.2"
       strokeLinecap="round"
       strokeLinejoin="round"
     >
@@ -17,20 +17,58 @@ function SearchPlusIcon() {
   )
 }
 
-function FindMatchButton({ poolLabel, eloRange, courtCount, slotCount, typeCount, onClick }) {
+function FindMatchButton({ summary, onClick }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="flex w-full items-center justify-between rounded-[10px] bg-[var(--accent)] px-[16px] py-[11px]"
+      style={{
+        width: '100%',
+        background: '#C8F135',
+        borderRadius: '10px',
+        padding: '12px 18px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        cursor: 'pointer',
+        border: 'none',
+      }}
     >
-      <div className="flex flex-col text-left">
-        <div className="font-display text-[17px] tracking-[0.05em] text-[#0f1a0f]">Find My Match</div>
-        <div className="mt-[2px] text-[10px] text-[rgba(15,26,15,0.60)]">
-          {poolLabel} · ±{eloRange} ELO · {courtCount} courts · {slotCount} time slots · {typeCount}
-        </div>
+      <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
+        <span
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: '20px',
+            color: '#0c140c',
+            letterSpacing: '0.05em',
+            display: 'block',
+          }}
+        >
+          Find My Match
+        </span>
+        <span
+          style={{
+            fontSize: '10px',
+            color: 'rgba(12,20,12,0.60)',
+            marginTop: '2px',
+            display: 'block',
+          }}
+        >
+          {summary}
+        </span>
       </div>
-      <div className="flex h-[36px] w-[36px] items-center justify-center rounded-full bg-[rgba(15,26,15,0.15)]">
+      <div
+        style={{
+          width: '38px',
+          height: '38px',
+          borderRadius: '50%',
+          background: 'rgba(12,20,12,0.18)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexShrink: 0,
+        }}
+      >
         <SearchPlusIcon />
       </div>
     </button>

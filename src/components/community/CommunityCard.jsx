@@ -1,52 +1,77 @@
 const badgeStyles = {
   open: {
-    background: 'rgba(74,222,128,0.20)',
+    background: 'rgba(74,222,128,0.22)',
     color: '#4ade80',
-    border: 'rgba(74,222,128,0.30)',
+    border: '1px solid rgba(74,222,128,0.35)',
     label: 'Open',
   },
   rated: {
-    background: 'rgba(200,241,53,0.15)',
+    background: 'rgba(200,241,53,0.16)',
     color: '#C8F135',
-    border: 'rgba(200,241,53,0.30)',
+    border: '1px solid rgba(200,241,53,0.30)',
     label: 'Rated',
   },
   comp: {
-    background: 'rgba(248,113,113,0.15)',
+    background: 'rgba(248,113,113,0.18)',
     color: '#f87171',
-    border: 'rgba(248,113,113,0.30)',
+    border: '1px solid rgba(248,113,113,0.32)',
     label: 'Comp',
   },
   casual: {
-    background: 'rgba(100,160,255,0.15)',
+    background: 'rgba(136,180,255,0.16)',
     color: '#88b4ff',
-    border: 'rgba(100,160,255,0.30)',
+    border: '1px solid rgba(136,180,255,0.30)',
     label: 'Casual',
   },
 }
 
+const BADGE_BASE_STYLE = {
+  borderRadius: '20px',
+  padding: '3px 8px',
+  fontSize: '10px',
+  fontWeight: 600,
+}
+
 function CommunityCard({ community }) {
   const actionText = community.joinType === 'request' ? 'Request' : community.joined ? 'Joined' : 'Join'
-  const actionClasses =
+  const actionStyle =
     community.joinType === 'request'
-      ? 'border-[rgba(248,113,113,0.25)] bg-[rgba(248,113,113,0.10)] text-[#f87171]'
+      ? {
+          border: '1px solid rgba(248,113,113,0.28)',
+          background: 'rgba(248,113,113,0.10)',
+          color: '#f87171',
+        }
       : community.joined
-        ? 'border-[rgba(200,241,53,0.10)] bg-[rgba(200,241,53,0.06)] text-[var(--muted)]'
-        : 'border-[rgba(200,241,53,0.28)] bg-[rgba(200,241,53,0.12)] text-[var(--accent)]'
+        ? {
+            border: '1px solid rgba(200,241,53,0.12)',
+            background: 'rgba(200,241,53,0.08)',
+            color: '#7a9a7a',
+          }
+        : {
+            border: '1px solid rgba(200,241,53,0.30)',
+            background: 'rgba(200,241,53,0.12)',
+            color: '#C8F135',
+          }
 
   return (
     <article
-      className={[
-        'cursor-pointer overflow-hidden rounded-[12px] bg-[var(--card)] transition-colors',
-        community.joined
-          ? 'border border-[rgba(200,241,53,0.28)]'
-          : 'border border-[rgba(200,241,53,0.12)] hover:border-[rgba(200,241,53,0.30)]',
-      ].join(' ')}
+      className="cursor-pointer overflow-hidden transition-colors"
+      style={{
+        borderRadius: '12px',
+        overflow: 'hidden',
+        background: '#142014',
+        border: community.joined
+          ? '1px solid rgba(200,241,53,0.25)'
+          : '1px solid rgba(200,241,53,0.10)',
+      }}
     >
-      <div className="relative flex h-[64px] items-end px-[10px] py-[7px]" style={{ background: community.gradient }}>
+      <div
+        className="relative flex items-end"
+        style={{ height: '120px', background: community.gradient, padding: '8px' }}
+      >
         <div
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(to bottom, transparent 20%, rgba(15,26,15,0.85))' }}
+          style={{ background: 'linear-gradient(to bottom, transparent 30%, rgba(12,20,12,0.90))' }}
         />
         <div className="relative z-[1] flex gap-[4px]">
           {community.badges.map((badge) => {
@@ -54,11 +79,11 @@ function CommunityCard({ community }) {
             return (
               <span
                 key={badge}
-                className="rounded-[20px] border px-[7px] py-[2px] text-[9px] font-semibold"
                 style={{
+                  ...BADGE_BASE_STYLE,
                   background: style.background,
                   color: style.color,
-                  borderColor: style.border,
+                  border: style.border,
                 }}
               >
                 {style.label}
@@ -68,34 +93,52 @@ function CommunityCard({ community }) {
         </div>
       </div>
 
-      <div className="flex flex-col px-[12px] pb-[12px] pt-[10px]">
-        <div className="font-display text-[14px] tracking-[0.04em] text-[var(--text)]">{community.name}</div>
-        <div className="mt-[2px] text-[10px] leading-[1.4] text-[var(--muted)]">{community.desc}</div>
+      <div className="flex flex-col" style={{ padding: '12px 14px 14px' }}>
+        <div
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: '16px',
+            color: '#e8f0e8',
+            letterSpacing: '0.03em',
+          }}
+        >
+          {community.name}
+        </div>
+        <div className="mt-[3px] text-[11px] leading-[1.4] text-[var(--muted)]">{community.desc}</div>
         {community.requirementLabel ? (
           <div className="mt-[4px] text-[9px] uppercase tracking-[0.06em] text-[#f87171]">
             {community.requirementLabel}
           </div>
         ) : null}
 
-        <div className="mt-[8px] flex items-center justify-between gap-[8px]">
+        <div className="mt-[10px] flex items-center justify-between gap-[8px]">
           <div className="flex items-center">
             {community.memberStack.map((member, index) => (
               <div
                 key={`${community.id}-${member.initials}`}
-                className="flex h-[15px] w-[15px] items-center justify-center rounded-full border-[1.5px] border-[var(--card)] text-[6px] font-bold"
+                className="flex h-[18px] w-[18px] items-center justify-center rounded-full border-[2px] border-[var(--card)] text-[7px] font-bold"
                 style={{
                   background: member.bg,
                   color: member.color,
-                  marginLeft: index === 0 ? 0 : -3,
+                  marginLeft: index === 0 ? 0 : -5,
                 }}
               >
                 {member.initials}
               </div>
             ))}
-            <span className="ml-[5px] text-[10px] text-[var(--muted)]">{community.members} members</span>
+            <span className="ml-[6px] text-[10px] text-[var(--muted)]">{community.members}</span>
           </div>
 
-          <button type="button" className={`rounded-[20px] border px-[10px] py-[3px] text-[10px] font-semibold ${actionClasses}`}>
+          <button
+            type="button"
+            style={{
+              ...actionStyle,
+              borderRadius: '20px',
+              padding: '4px 12px',
+              fontSize: '10px',
+              fontWeight: 600,
+            }}
+          >
             {actionText}
           </button>
         </div>

@@ -1,5 +1,3 @@
-import SectionHeader from '../layout/SectionHeader'
-
 function ActivityIcon({ icon, stroke }) {
   if (icon === 'heart') {
     return (
@@ -29,8 +27,13 @@ function ActivityIcon({ icon, stroke }) {
 function RecentActivity({ activity }) {
   return (
     <section className="flex flex-col gap-[8px]">
-      <SectionHeader title="RECENT ACTIVITY" />
-      <div className="rounded-[12px] border border-[var(--border)] bg-[var(--card)] px-[12px] py-[8px]">
+      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '15px', fontWeight: 500, color: '#e8f0e8' }}>
+        Recent Activity
+      </div>
+      <div
+        className="px-[14px] py-[10px]"
+        style={{ background: '#142014', border: '1px solid rgba(200,241,53,0.12)', borderRadius: '12px' }}
+      >
         {activity.map((item, index) => (
           <div
             key={`${item.time}-${index}`}
@@ -40,7 +43,7 @@ function RecentActivity({ activity }) {
             ].join(' ')}
           >
             <div
-              className="flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-[7px]"
+              className="flex h-[28px] w-[28px] shrink-0 items-center justify-center rounded-[8px]"
               style={{ background: item.iconBg }}
             >
               <ActivityIcon icon={item.icon} stroke={item.iconStroke} />

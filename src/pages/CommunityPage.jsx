@@ -57,7 +57,7 @@ function CommunityPage() {
 
   return (
     <main className="flex flex-1 overflow-hidden max-xl:flex-col">
-      <div className="flex flex-1 flex-col gap-[20px] overflow-y-auto px-[24px] py-[20px]">
+      <div className="flex flex-1 flex-col gap-[22px] overflow-y-auto px-[24px] py-[20px]">
         <GlobalMatchmakingPanel
           queueCount={143}
           poolScope={poolScope}
@@ -85,7 +85,7 @@ function CommunityPage() {
         <YourCommunitiesGrid communities={mockCommunities} />
       </div>
 
-      <aside className="w-[310px] shrink-0 overflow-y-auto border-l border-[rgba(200,241,53,0.08)] px-[18px] py-[20px] max-xl:w-full max-xl:border-l-0 max-xl:border-t">
+      <aside className="w-[310px] shrink-0 overflow-y-auto border-l border-[rgba(200,241,53,0.10)] bg-[rgba(9,21,9,0.35)] px-[18px] py-[20px] max-xl:w-full max-xl:border-l-0 max-xl:border-t">
         <div className="flex flex-col gap-[18px]">
           <ClubQuickStats />
           <MembersOnline members={mockMembers} />

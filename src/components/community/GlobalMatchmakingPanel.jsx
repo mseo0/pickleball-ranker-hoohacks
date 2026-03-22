@@ -7,6 +7,15 @@ import CourtSelector from './CourtSelector'
 import TimeSlotSelector from './TimeSlotSelector'
 import FindMatchButton from './FindMatchButton'
 
+const matchTypeLabels = {
+  rated: 'Rated',
+  unrated: 'Unrated',
+  competitive: 'Competitive',
+  casual: 'Casual',
+  doubles: 'Doubles',
+  singles: 'Singles',
+}
+
 function GlobalMatchmakingPanel({
   queueCount,
   poolScope,
@@ -32,13 +41,28 @@ function GlobalMatchmakingPanel({
 }) {
   const poolLabel =
     poolScope === 'anyone'
-      ? 'Anyone on Picklerank'
+      ? 'Anyone'
       : poolScope === 'specific'
         ? `${selectedCommunities.length} communities`
         : 'My communities'
 
+  const selectedTypeSummary = matchTypes
+    .map((type) => matchTypeLabels[type])
+    .filter(Boolean)
+    .join(' + ')
+
+  const summary = `${poolLabel} · ±${rangeDelta} ELO · ${selectedCourts.length} courts · ${selectedSlots.length} time slots${selectedTypeSummary ? ` · ${selectedTypeSummary}` : ''}`
+
   return (
-    <section className="relative flex flex-col gap-[14px] overflow-hidden rounded-[14px] border-2 border-[rgba(200,241,53,0.22)] bg-[var(--card)] px-[20px] py-[18px]">
+    <section
+      className="relative flex flex-col gap-[14px] overflow-hidden"
+      style={{
+        background: '#142014',
+        border: '2px solid rgba(200,241,53,0.22)',
+        borderRadius: '14px',
+        padding: '18px 20px',
+      }}
+    >
       <div
         className="pointer-events-none absolute right-[-40px] top-[-40px] h-[180px] w-[180px]"
         style={{
@@ -48,10 +72,30 @@ function GlobalMatchmakingPanel({
 
       <div className="relative flex items-start justify-between gap-[14px]">
         <div className="flex flex-col">
-          <div className="mb-[3px] text-[9px] uppercase tracking-[0.1em] text-[var(--accent)]">
+          <span
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: '9px',
+              fontWeight: 600,
+              color: '#C8F135',
+              textTransform: 'uppercase',
+              letterSpacing: '0.12em',
+              marginBottom: '3px',
+              display: 'block',
+            }}
+          >
             Global Matchmaking
-          </div>
-          <div className="font-display text-[22px] tracking-[0.04em] text-[var(--text)]">
+          </span>
+          <div
+            style={{
+              fontFamily: "'Bebas Neue', sans-serif",
+              fontSize: '26px',
+              fontWeight: 400,
+              color: '#e8f0e8',
+              letterSpacing: '0.04em',
+              lineHeight: 1,
+            }}
+          >
             Find My Match
           </div>
           <div className="mt-[4px] max-w-[420px] text-[11px] leading-[1.5] text-[var(--muted)]">
@@ -59,7 +103,7 @@ function GlobalMatchmakingPanel({
           </div>
         </div>
 
-        <div className="flex items-center gap-[6px] rounded-[20px] border border-[rgba(74,222,128,0.20)] bg-[rgba(74,222,128,0.10)] px-[10px] py-[4px]">
+        <div className="flex items-center gap-[7px] rounded-[20px] border border-[rgba(74,222,128,0.22)] bg-[rgba(74,222,128,0.10)] px-[12px] py-[5px]">
           <span className="h-[7px] w-[7px] animate-pulse rounded-full bg-[#4ade80]" />
           <span className="text-[11px] font-semibold text-[#4ade80]">{queueCount} players queued</span>
         </div>
@@ -113,14 +157,7 @@ function GlobalMatchmakingPanel({
         />
       </div>
 
-      <FindMatchButton
-        poolLabel={poolLabel}
-        eloRange={rangeDelta}
-        courtCount={selectedCourts.length}
-        slotCount={selectedSlots.length}
-        typeCount={matchTypes.length}
-        onClick={onFindMatch}
-      />
+      <FindMatchButton summary={summary} onClick={onFindMatch} />
     </section>
   )
 }

@@ -4,31 +4,38 @@
   --font-display: 'Bebas Neue', sans-serif;
   --font-body: 'DM Sans', sans-serif;
   --green: #4ade80;
-  --green-bg: rgba(74, 222, 128, 0.1);
-  --green-bd: rgba(74, 222, 128, 0.25);
+  --green-bg: rgba(74, 222, 128, 0.13);
+  --green-bd: rgba(74, 222, 128, 0.28);
   --yellow: #facc15;
-  --yellow-bg: rgba(250, 204, 21, 0.1);
+  --yellow-bg: rgba(250, 204, 21, 0.12);
   --red: #ef4444;
-  --red-bg: rgba(248, 113, 113, 0.1);
-  --red-bd: rgba(248, 113, 113, 0.22);
+  --red-bg: rgba(248, 113, 113, 0.13);
+  --red-bd: rgba(248, 113, 113, 0.28);
   --blue: #88b4ff;
-  --blue-bg: rgba(100, 160, 255, 0.1);
-  --blue-bd: rgba(100, 160, 255, 0.25);
+  --blue-bg: rgba(136, 180, 255, 0.13);
+  --blue-bd: rgba(136, 180, 255, 0.3);
+  --purple: #a78bfa;
+  --purple-bg: rgba(167, 139, 250, 0.13);
 }
 
 :root,
 :root[data-theme='dark'] {
-  --bg: #0f1a0f;
+  --bg: #0c140c;
   --surface: #1a2a1a;
-  --card: #162016;
-  --card2: #1e2e1e;
-  --sidebar: #0d170d;
-  --border: rgba(200, 241, 53, 0.13);
+  --card: #142014;
+  --card2: #1a2a1a;
+  --sidebar: #0d150d;
+  --sidebar-bg: #0d150d;
+  --topbar-bg: #0c140c;
+  --border: rgba(200, 241, 53, 0.14);
+  --border-mid: rgba(200, 241, 53, 0.25);
+  --border-hi: rgba(200, 241, 53, 0.4);
   --border-sub: rgba(200, 241, 53, 0.08);
   --text: #e8f0e8;
   --muted: #7a9a7a;
   --dim: #4a6a4a;
   --accent: #c8f135;
+  --accent-dark: #0c140c;
   --accent-dim: #a8cc1a;
   --logo-icon-ink: #0f1a0f;
 }
@@ -40,11 +47,14 @@
   --card2: #f8faf5;
   --sidebar: #ffffff;
   --border: rgba(80, 120, 40, 0.12);
+  --border-mid: rgba(80, 120, 40, 0.2);
+  --border-hi: rgba(80, 120, 40, 0.32);
   --border-sub: rgba(80, 120, 40, 0.08);
   --text: #1a2a1a;
   --muted: #7a9a6a;
   --dim: #a0b890;
   --accent: #3d7a00;
+  --accent-dark: #ffffff;
   --accent-dim: #2d5c00;
   --logo-icon-ink: #ffffff;
 }
@@ -104,6 +114,19 @@ svg {
   height: 100vh;
   overflow: hidden;
   background: var(--bg);
+}
+
+*::-webkit-scrollbar {
+  width: 3px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(200, 241, 53, 0.15);
+  border-radius: 2px;
 }
 
 @keyframes courtListFlash {

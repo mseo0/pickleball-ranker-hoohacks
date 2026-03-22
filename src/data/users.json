@@ -8,13 +8,19 @@
       "avatar": "NA",
       "createdAt": "2026-03-22T07:51:54.620Z",
       "profile": {
-        "eloRating": 1200,
-        "rank": "Bronze I",
+        "eloRating": 4380,
         "duprRating": null,
         "city": "Charletsovile",
-        "matchesPlayed": 0,
-        "wins": 0
-      }
+        "matchesPlayed": 64,
+        "wins": 38
+      },
+      "recentMatches": [
+        { "result": "L", "players": "vs. J. Keller & P. Moss", "meta": "Pen Park · 1h ago", "score": "8–11", "elo": -100 },
+        { "result": "L", "players": "vs. T. Novak & E. Hart", "meta": "Key Rec · Yesterday", "score": "7–11", "elo": -100 },
+        { "result": "W", "players": "vs. D. Price & L. Cole", "meta": "Darden Towe · 2 days ago", "score": "11–9", "elo": 100 },
+        { "result": "L", "players": "vs. R. Shah & M. Young", "meta": "PVCC · 4 days ago", "score": "9–11", "elo": -100 },
+        { "result": "W", "players": "vs. A. Reid & S. Grant", "meta": "Pen Park · 1 week ago", "score": "11–6", "elo": 100 }
+      ]
     },
     {
       "id": "f2fa62d9-5624-4725-8664-396aabb823e6",
@@ -24,13 +30,63 @@
       "avatar": "MS",
       "createdAt": "2026-03-22T08:02:33.888Z",
       "profile": {
-        "eloRating": 1200,
-        "rank": "Bronze I",
+        "eloRating": 4720,
         "duprRating": null,
         "city": "Charlettsville",
-        "matchesPlayed": 0,
-        "wins": 0
-      }
+        "matchesPlayed": 91,
+        "wins": 57
+      },
+      "recentMatches": [
+        { "result": "W", "players": "vs. K. Li & N. Brown", "meta": "Greencroft · 2h ago", "score": "11–5", "elo": 100 },
+        { "result": "W", "players": "vs. E. Stone & H. Park", "meta": "Boar's Head · Yesterday", "score": "11–7", "elo": 100 },
+        { "result": "W", "players": "vs. C. Diaz & M. Fox", "meta": "ACAC · 3 days ago", "score": "11–9", "elo": 100 },
+        { "result": "L", "players": "vs. Timothy & Zane", "meta": "Pen Park · 4 days ago", "score": "8–11", "elo": -100 },
+        { "result": "L", "players": "vs. J. Hall & B. Reed", "meta": "Darden Towe · 6 days ago", "score": "10–12", "elo": -100 }
+      ]
+    },
+    {
+      "id": "c6db4d71-c19e-4282-ba90-57705a3324ea",
+      "username": "Timothy",
+      "email": "parktimothyjm@gmail.com",
+      "passwordHash": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+      "avatar": "TI",
+      "createdAt": "2026-03-22T08:29:16.235Z",
+      "profile": {
+        "eloRating": 5600,
+        "duprRating": 5,
+        "city": "Charlottesville",
+        "matchesPlayed": 128,
+        "wins": 84
+      },
+      "recentMatches": [
+        { "result": "W", "players": "vs. MSEO & Zane", "meta": "Pen Park · 45m ago", "score": "11–6", "elo": 100 },
+        { "result": "W", "players": "vs. Naython & J. Patel", "meta": "Darden Towe · 3h ago", "score": "11–8", "elo": 100 },
+        { "result": "W", "players": "vs. R. Chen & D. Okafor", "meta": "Brooks YMCA · Yesterday", "score": "11–7", "elo": 100 },
+        { "result": "W", "players": "vs. M. Torres & K. Patel", "meta": "Darden Towe · 2 days ago", "score": "11–7", "elo": 100 },
+        { "result": "L", "players": "vs. S. Williams & J. Nakamura", "meta": "McIntire · 4 days ago", "score": "8–11", "elo": -100 }
+      ]
+    },
+    {
+      "id": "f1619310-d23a-4a84-8668-84655c58caa3",
+      "username": "Zane",
+      "email": "zane@email.com",
+      "passwordHash": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+      "avatar": "ZA",
+      "createdAt": "2026-03-22T08:45:56.233Z",
+      "profile": {
+        "eloRating": 4510,
+        "duprRating": 1.2,
+        "city": "Charlottesville",
+        "matchesPlayed": 73,
+        "wins": 41
+      },
+      "recentMatches": [
+        { "result": "W", "players": "vs. C. Bell & T. Wise", "meta": "Key West Club · 2h ago", "score": "11–9", "elo": 100 },
+        { "result": "L", "players": "vs. Timothy & MSEO", "meta": "Pen Park · Yesterday", "score": "6–11", "elo": -100 },
+        { "result": "W", "players": "vs. H. Lowe & B. Kim", "meta": "Forest Lakes · 2 days ago", "score": "11–4", "elo": 100 },
+        { "result": "W", "players": "vs. P. Shah & E. Long", "meta": "ACAC · 5 days ago", "score": "11–8", "elo": 100 },
+        { "result": "L", "players": "vs. R. Moss & K. Dean", "meta": "Boar's Head · 1 week ago", "score": "9–11", "elo": -100 }
+      ]
     }
   ]
 }

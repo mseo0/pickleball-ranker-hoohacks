@@ -1,10 +1,32 @@
-const stats = [
-  { label: 'Matches', value: '142', sub: '68% win rate' },
-  { label: 'Streak', value: '7W', sub: 'Personal best' },
-  { label: 'Local Rank', value: '#84', sub: 'Charlottesville' },
-]
+function getCurrentStreak(matches) {
+  if (!matches.length) {
+    return { value: '0', sub: 'No matches logged' }
+  }
 
-function StatsRow() {
+  const firstResult = matches[0].result
+  let streakLength = 0
+
+  for (const match of matches) {
+    if (match.result !== firstResult) {
+      break
+    }
+    streakLength += 1
+  }
+
+  return {
+    value: `${streakLength}${firstResult}`,
+    sub: firstResult === 'W' ? 'Current win streak' : 'Current skid',
+  }
+}
+
+function StatsRow({ localRank = 1, matches = [] }) {
+  const streak = getCurrentStreak(matches)
+  const stats = [
+    { label: 'Matches', value: '142', sub: '68% win rate' },
+    { label: 'Streak', value: streak.value, sub: streak.sub },
+    { label: 'Local Rank', value: `#${localRank}`, sub: 'Charlottesville' },
+  ]
+
   return (
     <section className="grid gap-[10px] md:grid-cols-3">
       {stats.map((stat) => (

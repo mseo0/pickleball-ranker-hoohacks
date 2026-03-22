@@ -108,8 +108,7 @@ export function AuthProvider({ children }) {
       createdAt: new Date().toISOString(),
       profile: {
         eloRating: 1200,
-        rank: 'Bronze I',
-        duprRating: null,
+        duprRating: 1.2,
         city: city || 'Unknown',
         matchesPlayed: 0,
         wins: 0,

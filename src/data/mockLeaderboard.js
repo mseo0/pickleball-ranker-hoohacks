@@ -19,11 +19,11 @@ export const mockLeaderboard = [
   },
   {
     rank: 84,
-    initials: 'AJ',
+    initials: 'TI',
     avatarBg: 'rgba(200,241,53,0.2)',
     avatarColor: 'var(--accent)',
     name: 'You',
-    score: 1847,
+    score: 5600,
     isMe: true,
   },
   {

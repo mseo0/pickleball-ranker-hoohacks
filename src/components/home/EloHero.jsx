@@ -1,20 +1,25 @@
+import { useAuth } from '../../auth/AuthContext'
+
 function EloHero() {
+  const { currentUser } = useAuth()
+  const rating = currentUser?.profile?.eloRating ?? 1200
+  const recentMatches = currentUser?.recentMatches ?? []
+  const ratingDelta = recentMatches.reduce(
+    (total, match) => total + (match.result === 'W' ? 100 : -100),
+    0,
+  )
+  const deltaPrefix = ratingDelta >= 0 ? '+' : '−'
+
   return (
     <section className="rounded-[12px] border border-[var(--border)] bg-[var(--card)] px-5 py-[18px]">
       <div className="flex flex-col gap-6 md:flex-row md:items-stretch">
         <div className="flex-1">
           <div className="mb-1 text-[10px] uppercase tracking-[0.08em] text-[var(--muted)]">
-            ELO Rating
+            Player Rating
           </div>
-          <div className="font-display text-[72px] leading-none text-[var(--accent)]">1847</div>
-          <div className="mt-1 text-[12px] text-[var(--green)]">▲ +23 this week</div>
-          <div className="mt-2 flex flex-wrap gap-[6px]">
-            <span className="rounded-[20px] border border-[color:color-mix(in_srgb,var(--accent)_28%,transparent)] bg-[color:color-mix(in_srgb,var(--accent)_12%,transparent)] px-[10px] py-[3px] text-[11px] font-medium text-[var(--accent)]">
-              Gold III
-            </span>
-            <span className="rounded-[20px] border border-[var(--blue-bd)] bg-[var(--blue-bg)] px-[10px] py-[3px] text-[11px] font-medium text-[var(--blue)]">
-              DUPR 4.2
-            </span>
+          <div className="font-display text-[72px] leading-none text-[var(--accent)]">{rating}</div>
+          <div className={`mt-1 text-[12px] ${ratingDelta >= 0 ? 'text-[var(--green)]' : 'text-[#f87171]'}`}>
+            {ratingDelta >= 0 ? '▲' : '▼'} {deltaPrefix}{Math.abs(ratingDelta)} over last 5 matches
           </div>
         </div>
 

@@ -10,7 +10,7 @@ import { mockMembers } from '../data/mockMembers'
 import { mockEvents } from '../data/mockEvents'
 import { mockActivity } from '../data/mockActivity'
 
-const userElo = 1847
+const userElo = 5600
 
 const selectableCourts = [
   { id: 'darden', name: 'Darden Towe', dist: '0.8 mi', status: 'Open', color: '#4ade80' },
@@ -26,8 +26,8 @@ function CommunityPage() {
   const [poolScope, setPoolScope] = useState('anyone')
   const [selectedCommunities, setSelectedCommunities] = useState(['cville', 'sunday'])
   const [matchTypes, setMatchTypes] = useState(['rated', 'unrated', 'doubles'])
-  const [eloMin, setEloMin] = useState(1697)
-  const [eloMax, setEloMax] = useState(1997)
+  const [eloMin, setEloMin] = useState(5450)
+  const [eloMax, setEloMax] = useState(5750)
   const [selectedCourts, setSelectedCourts] = useState(['darden', 'pen'])
   const [selectedSlots, setSelectedSlots] = useState(['10am', '12pm', '4pm'])
   const [eloRangeDelta, setEloRangeDelta] = useState(150)

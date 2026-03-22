@@ -85,7 +85,7 @@ function Sidebar({ currentUser }) {
               {currentUser?.username || 'Picklerank User'}
             </div>
             <div className="truncate text-[11px] text-[var(--muted)]">
-              {currentUser?.profile?.rank || 'Bronze I'} · {currentUser?.profile?.city || 'Unknown'}
+              {currentUser?.profile?.eloRating ?? 1200} rating · {currentUser?.profile?.city || 'Unknown'}
             </div>
           </div>
         </div>

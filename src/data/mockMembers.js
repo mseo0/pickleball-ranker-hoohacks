@@ -18,13 +18,13 @@ export const mockMembers = [
     elo: 1991,
   },
   {
-    initials: 'AJ',
+    initials: 'TI',
     bg: 'rgba(200,241,53,0.20)',
     color: '#C8F135',
     name: 'You',
     status: 'Online',
     statusColor: '#C8F135',
-    elo: 1847,
+    elo: 5600,
   },
   {
     initials: 'MB',

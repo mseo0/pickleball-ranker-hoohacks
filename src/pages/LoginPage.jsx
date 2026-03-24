@@ -22,7 +22,7 @@ export default function LoginPage() {
         <div className="flex h-[38px] w-[38px] items-center justify-center rounded-[10px] bg-[var(--accent)] text-[#0f1a0f]">
           <PickleballMark />
         </div>
-        <div className="font-display text-[34px] tracking-[0.08em]">PICKLERANK</div>
+        <div className="font-display text-[34px] tracking-[0.08em]">PICKELO</div>
       </div>
 
       <div className="mb-[16px] flex w-full max-w-[360px] gap-[24px] border-b border-[rgba(200,241,53,0.12)]">
